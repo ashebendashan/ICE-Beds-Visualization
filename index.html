@@ -1,1481 +1,1478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ICE Beds by Threat Level - FY2025</title>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICE Beds by Threat Level - FY2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body {
-            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fafafa;
-            color: #1a1a1a;
-            line-height: 1.6;
-        }
+        body {
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fafafa;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
 
-        .intro-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 40px;
-            text-align: center;
-            background: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
-        }
+        .intro-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            text-align: center;
+            background: #ffffff;
+        }
 
-        .intro-section h1 {
-            font-family: 'Crimson Text', Georgia, serif;
-            font-size: 3.5em;
-            font-weight: 600;
-            margin-bottom: 30px;
-            color: #1a1a1a;
-            line-height: 1.2;
-            max-width: 900px;
-        }
+        .intro-section h1 {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 2.8451em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+            line-height: 1.2;
+            max-width: 900px;
+        }
 
-        .intro-section .subtitle {
-            font-size: 1.25em;
-            max-width: 700px;
-            line-height: 1.7;
-            color: #4a4a4a;
-            font-weight: 400;
-        }
+        .intro-section .subtitle {
+            font-size: 1.25em;
+            max-width: 700px;
+            line-height: 1.7;
+            color: #4a4a4a;
+            font-weight: 400;
+        }
 
-        .intro-section .scroll-hint {
-            margin-top: 60px;
-            font-size: 0.9em;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 500;
-        }
+        .intro-section .scroll-hint {
+            margin-top: 60px;
+            font-size: 0.9em;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
 
-        .viz-container {
-            min-height: 400vh;
-            background: #ffffff;
-            padding: 80px 40px;
-        }
+        .viz-container {
+            min-height: 400vh;
+            background: #ffffff;
+            padding: 80px 40px;
+        }
 
-        .beds-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: sticky;
-            top: 100px;
-        }
+        .beds-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: sticky;
+            top: 100px;
+        }
 
-        .section-title {
-            font-family: 'Crimson Text', Georgia, serif;
-            font-size: 2.5em;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
+        .section-title {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
 
-        .section-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 50px;
-            font-size: 1.1em;
-            font-weight: 400;
-        }
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.1em;
+            font-weight: 400;
+        }
 
-        .beds-grid {
-            display: grid;
-            grid-template-columns: repeat(25, 1fr);
-            gap: 8px;
-            margin-bottom: 50px;
-        }
+        .beds-grid {
+            display: grid;
+            grid-template-columns: repeat(25, 1fr);
+            gap: 8px;
+            margin-bottom: 50px;
+        }
 
-        .bed {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.5s ease;
-        }
+        .bed {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+        }
 
-        .bed svg {
-            width: 100%;
-            height: 100%;
-        }
+        .bed svg {
+            width: 100%;
+            height: 100%;
+        }
 
-        .bed .bed-frame {
-            fill: #e8e8e8;
-            transition: fill 0.5s ease;
-        }
+        .bed .bed-frame {
+            fill: #e8e8e8;
+            transition: fill 0.5s ease;
+        }
 
-        .bed.threat-1 .bed-frame {
-            fill: #c1272d;
-        }
+        .bed.threat-1 .bed-frame {
+            fill: #c1272d;
+        }
 
-        .bed.threat-2 .bed-frame {
-            fill: #e67e22;
-        }
+        .bed.threat-2 .bed-frame {
+            fill: #e67e22;
+        }
 
-        .bed.threat-3 .bed-frame {
-            fill: #f39c12;
-        }
+        .bed.threat-3 .bed-frame {
+            fill: #f39c12;
+        }
 
-        .bed.no-threat .bed-frame {
-            fill: #3498db;
-        }
+        .bed.no-threat .bed-frame {
+            fill: #3498db;
+        }
 
-        .legend {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-            padding: 40px;
-            background: #fafafa;
-            border: 1px solid #e0e0e0;
-        }
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            padding: 40px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
 
-        .legend-item {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .legend-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-        .legend-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .legend-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-        .legend-color {
-            width: 24px;
-            height: 24px;
-            border-radius: 2px;
-            flex-shrink: 0;
-        }
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
 
-        .legend-label {
-            font-weight: 600;
-            font-size: 1em;
-            color: #1a1a1a;
-        }
+        .legend-label {
+            font-weight: 600;
+            font-size: 1em;
+            color: #1a1a1a;
+        }
 
-        .legend-description {
-            font-size: 0.9em;
-            color: #666;
-            line-height: 1.5;
-        }
+        .legend-description {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.5;
+        }
 
-        .legend-count {
-            font-family: 'Crimson Text', Georgia, serif;
-            font-size: 2em;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-top: 5px;
-        }
+        .legend-count {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 2em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 5px;
+        }
 
-        .stats {
-            margin-top: 60px;
-            padding: 50px 40px;
-            background: #ffffff;
-            border-top: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
-        }
+        .stats {
+            margin-top: 60px;
+            padding: 50px 40px;
+            background: #ffffff;
+        }
 
-        .stats h3 {
-            font-family: 'Crimson Text', Georgia, serif;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 40px;
-            font-weight: 600;
-            color: #1a1a1a;
-        }
+        .stats h3 {
+            font-family: 'Crimson Text', Georgia, serif;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
 
-        .key-finding {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.2em;
-            line-height: 1.8;
-            color: #2c3e50;
-            text-align: center;
-            padding: 30px;
-            background: #f8f9fa;
-        }
+        .key-finding {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #2c3e50;
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+        }
 
-        .key-finding strong {
-            font-weight: 600;
-            color: #1a1a1a;
-        }
+        .key-finding strong {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
 
-        .article-section {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 60px 40px;
-            background: #ffffff;
-            border-top: 3px solid #2c3e50;
-        }
+        .article-section {
+            max-width: 800px;
+            margin: 0px auto;
+            padding: 60px 40px;
+            background: #ffffff;
+        }
 
-        .article-section p {
-            font-family: 'Crimson Text', Georgia, serif;
-            font-size: 1.2em;
-            line-height: 1.9;
-            color: #2c3e50;
-            margin-bottom: 1.5em;
-        }
+        .article-section p {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.2em;
+            line-height: 1.9;
+            color: #2c3e50;
+            margin-bottom: 1.5em;
+        }
 
-        .article-section p a {
-            color: #2c3e50;
-            text-decoration: underline;
-            transition: color 0.2s ease;
-        }
+        .article-section p a {
+            color: #2c3e50;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
 
-        .article-section p a:hover {
-            color: #3498db;
-        }
+        .article-section p a:hover {
+            color: #3498db;
+        }
 
-        .article-section h2 {
-            font-family: 'Crimson Text', Georgia, serif;
-            font-size: 2.2em;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin: 2em 0 1em 0;
-            line-height: 1.3;
-        }
+        .article-section h2 {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 2.2em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 2em 0 1em 0;
+            line-height: 1.3;
+        }
 
-        .article-section h3 {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 1.5em;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin: 2em 0 1em 0;
-        }
+        .article-section h3 {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 2em 0 1em 0;
+        }
 
-        .article-section .quote {
-            color: #2c3e50;
-            margin: 1.5em 0;
-        }
+        .article-section .quote {
+            color: #2c3e50;
+            margin: 1.5em 0;
+        }
 
-        .article-section .highlight-stat {
-            background: #f8f9fa;
-            padding: 30px;
-            margin: 2em 0;
-            font-size: 1.1em;
-        }
+        .article-section .highlight-stat {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 2em 0;
+            font-size: 1.1em;
+        }
 
-      .article-image {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto 40px auto;
-    text-align: center;
+      .article-image {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    text-align: center;
 }
 
 .article-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 2px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 2px;
 }
 
-        .image-caption {
-            font-family: 'Work Sans', sans-serif;
-            font-size: 0.85em;
-            color: #666;
-            margin-top: 8px;
-            line-height: 1.4;
-            font-style: italic;
-        }
+        .image-caption {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 8px;
+            line-height: 1.4;
+            font-style: italic;
+        }
 
-        @media (max-width: 768px) {
-            .beds-grid {
-                grid-template-columns: repeat(15, 1fr);
-                gap: 5px;
-            }
-            
-            .intro-section h1 {
-                font-size: 2.2em;
-            }
-            
-            .intro-section .subtitle {
-                font-size: 1.1em;
-            }
+        @media (max-width: 768px) {
+            .beds-grid {
+                grid-template-columns: repeat(15, 1fr);
+                gap: 5px;
+            }
+            
+            .intro-section h1 {
+                font-size: 2.2em;
+            }
+            
+            .intro-section .subtitle {
+                font-size: 1.1em;
+            }
 
-            .section-title {
-                font-size: 1.8em;
-            }
+            .section-title {
+                font-size: 1.8em;
+            }
 
-            .legend {
-                grid-template-columns: 1fr;
-                padding: 30px 20px;
-            }
+            .legend {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
 
-            .article-section {
-                padding: 40px 20px;
-            }
+            .article-section {
+                padding: 40px 20px;
+            }
 
-            .article-section p {
-                font-size: 1.1em;
-            }
+            .article-section p {
+                font-size: 1.1em;
+            }
 
-            .article-section h2 {
-                font-size: 1.8em;
-            }
+            .article-section h2 {
+                font-size: 1.8em;
+            }
 
-            .article-image {
-                float: none;
-                width: 100%;
-                margin: 20px 0;
-            }
-        }
-    </style>
+            .article-image {
+                float: none;
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="intro-section">
-        <h1>Plymouth County Correctional Facility</h1>
-        <p class="subtitle">ICE rents 526 beds at this facility, with 449 occupied on an average day in fiscal year 2025. As you scroll, watch how these beds fill in by threat level classification.</p>
-        <p class="scroll-hint">Scroll to explore ↓</p>
-    </div>
+    <div class="intro-section">
+        <h1>Plymouth County Correctional Facility</h1>
+        <p class="subtitle">ICE rents 526 beds at this facility, with 449 occupied on an average day in fiscal year 2025. As you scroll, watch how these beds fill in by threat level classification.</p>
+        <p class="scroll-hint">Scroll to explore ↓</p>
+    </div>
 
-    <div class="viz-container">
-        <div class="beds-wrapper">
-            <h2 class="section-title">449 Beds by Threat Level</h2>
-            <p class="section-subtitle">Average Daily Population, FY2025</p>
-            
-            <div class="beds-grid" id="bedsGrid"></div>
+    <div class="viz-container">
+        <div class="beds-wrapper">
+            <h2 class="section-title">449 Beds by Threat Level</h2>
+            <p class="section-subtitle">Average Daily Population, FY2025</p>
+            
+            <div class="beds-grid" id="bedsGrid"></div>
 
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-header">
-                        <div class="legend-color" style="background: #c1272d;"></div>
-                        <div class="legend-label">Threat Level 1</div>
-                    </div>
-                    <div class="legend-description">Highest severity based on recency and seriousness of criminal behavior</div>
-                    <div class="legend-count">34 beds</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-header">
-                        <div class="legend-color" style="background: #e67e22;"></div>
-                        <div class="legend-label">Threat Level 2</div>
-                    </div>
-                    <div class="legend-description">Medium severity criminal history</div>
-                    <div class="legend-count">13 beds</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-header">
-                        <div class="legend-color" style="background: #f39c12;"></div>
-                        <div class="legend-label">Threat Level 3</div>
-                    </div>
-                    <div class="legend-description">Lower severity criminal history</div>
-                    <div class="legend-count">11 beds</div>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-header">
-                        <div class="legend-color" style="background: #3498db;"></div>
-                        <div class="legend-label">No Threat Level</div>
-                    </div>
-                    <div class="legend-description">No criminal convictions</div>
-                    <div class="legend-count">392 beds</div>
-                </div>
-            </div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-header">
+                        <div class="legend-color" style="background: #c1272d;"></div>
+                        <div class="legend-label">Threat Level 1</div>
+                    </div>
+                    <div class="legend-description">Highest severity based on recency and seriousness of criminal behavior</div>
+                    <div class="legend-count">34 beds</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-header">
+                        <div class="legend-color" style="background: #e67e22;"></div>
+                        <div class="legend-label">Threat Level 2</div>
+                    </div>
+                    <div class="legend-description">Medium severity criminal history</div>
+                    <div class="legend-count">13 beds</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-header">
+                        <div class="legend-color" style="background: #f39c12;"></div>
+                        <div class="legend-label">Threat Level 3</div>
+                    </div>
+                    <div class="legend-description">Lower severity criminal history</div>
+                    <div class="legend-count">11 beds</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-header">
+                        <div class="legend-color" style="background: #3498db;"></div>
+                        <div class="legend-label">No Threat Level</div>
+                    </div>
+                    <div class="legend-description">No criminal convictions</div>
+                    <div class="legend-count">392 beds</div>
+                </div>
+            </div>
 
-            <div class="stats">
-                <h3>The Bottom Line</h3>
-                <div class="key-finding">
-                    <strong>87.3%</strong> of ICE detainees at Plymouth County Correctional Facility have no criminal convictions. Only <strong>58 of 449 occupied beds</strong> (12.9%) are held by individuals with any threat level classification.
-                </div>
-            </div>
-        </div>
-    </div>
+            <div class="stats">
+                <h3>The Bottom Line</h3>
+                <div class="key-finding">
+                    <strong>87.3%</strong> of ICE detainees at Plymouth County Correctional Facility have no criminal convictions. Only <strong>58 of 449 occupied beds</strong> (12.9%) are held by individuals with any threat level classification.
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Article Content -->
-    <div class="article-section">
-        <div class="article-image">
-            <img src="plymouth-rock-closeup.jpg" alt="Plymouth Rock with 1620 carved into it">
-            <div class="image-caption">A view of Plymouth Rock, November 19, 2025. Photo: Asher Ben-Dashan</div>
-        </div>
-        
-        <p>On the shore of a quaint, touristy New England town sits a grand marble pavilion that houses Plymouth Rock. It is the physical representation of the first wave of immigrants that came to the "New World" to escape religious persecution.</p>
-        
-        <p>The monument has become a symbol of striking irony when contrasted with the immigration policies of Plymouth County and the federal government.</p>
-        
-        <p>Just 2.4 miles away is the Plymouth County Correctional Facility (PCCF), the last remaining prison in Massachusetts that holds an active contract with Immigration and Customs Enforcement (ICE).</p>
-        
-        <p class="quote">"My clients are sitting in the Plymouth County Jail," said immigration attorney Todd Pomerleau, who has represented numerous individuals held there by ICE. "They have escaped similar persecution and yet are being persecuted by the United States of America."</p>
-        
-        <p>Joseph D. McDonald Jr. became the sheriff of Plymouth County in 2005 and has since overseen PCCF's contracts with ICE. He is one of two Republican sheriffs in Massachusetts and is vocal about his belief that local law enforcement should work congruently with the federal government.</p>
-        <div class="article-image">
-    <img src="sheriff1.jpg" alt="Description">
-    <div class="image-caption">Sheriff Joseph D. McDonald Jr. stands in the Department Headquarters, November 19, 2025. Photo: Asher Ben-Dashan</div>
+    <!-- Article Content -->
+    <div class="article-section">
+        <div class="article-image">
+            <img src="plymouth-rock-closeup.jpg" alt="Plymouth Rock with 1620 carved into it">
+            <div class="image-caption">A view of Plymouth Rock, November 19, 2025. Photo: Asher Ben-Dashan</div>
+        </div>
+        <p style="text-align: left; font-family: 'Crimson Text', Georgia, serif;"><b>By Emily Glick and Asher Ben-Dashan</b></p>
+        
+        <p>On the shore of a quaint, touristy New England town sits a grand marble pavilion that houses Plymouth Rock. It is the physical representation of the first wave of immigrants that came to the "New World" to escape religious persecution.</p>
+        
+        <p>The monument has become a symbol of striking irony when contrasted with the immigration policies of Plymouth County and the federal government.</p>
+        
+        <p>Just 2.4 miles away is the Plymouth County Correctional Facility (PCCF), the last remaining prison in Massachusetts that holds an active contract with Immigration and Customs Enforcement (ICE).</p>
+        
+        <p class="quote">"My clients are sitting in the Plymouth County Jail," said immigration attorney Todd Pomerleau, who has represented numerous individuals held there by ICE. "They have escaped similar persecution and yet are being persecuted by the United States of America."</p>
+        
+        <p>Joseph D. McDonald Jr. became the sheriff of Plymouth County in 2005 and has since overseen PCCF's contracts with ICE. He is one of two Republican sheriffs in Massachusetts and is vocal about his belief that local law enforcement should work congruently with the federal government.</p>
+        <div class="article-image">
+    <img src="sheriff1.jpg" alt="Description">
+    <div class="image-caption">Sheriff Joseph D. McDonald Jr. stands in the Department Headquarters, November 19, 2025. Photo: Asher Ben-Dashan</div>
 </div>
-        
-        <p>The most recent contract with PCCF and ICE was signed in September 2024 and will last until 2029.</p>
-        
-        <p>PCCF is also the only remaining facility in Massachusetts that holds ICE detainees. In recent years several other Massachusetts county jails ended their ICE contracts. For example, the contract for immigrant detainees at Bristol County Sheriff's Office was <a href="https://www.wbur.org/news/2021/05/20/ice-terminates-contracts-bristol-county-sheriff-hodgson" target="_blank">terminated in 2021</a> after serious concerns about mistreatment of detainees.</p>
-        
-        <p class="quote">"[Plymouth] didn't lose their contract with ICE unlike the Bristol County Jail and South Bay," said Pomerleau. "There are a few other facilities we used to have, but the problem with them losing the contracts is now, for example, there's no bed space for women."</p>
-        
-        <p>Limitations outlined in its contract permit only the jailing of male detainees over the age of 18, requiring other demographics to be sent out of state to facilities, where laws and policies differ.</p>
-        <div class="article-image">
-    <img src="todd.jpg" alt="Description">
-    <div class="image-caption">Todd Pomerleau, an immigration lawyer representing many high profile immigration cases in Massachusetts, sits in his office, November 25, 2025. Photo: Emily Glick</div>
+        
+        <p>The most recent contract with PCCF and ICE was signed in September 2024 and will last until 2029.</p>
+        
+        <p>PCCF is also the only remaining facility in Massachusetts that holds ICE detainees. In recent years several other Massachusetts county jails ended their ICE contracts. For example, the contract for immigrant detainees at Bristol County Sheriff's Office was <a href="https://www.wbur.org/news/2021/05/20/ice-terminates-contracts-bristol-county-sheriff-hodgson" target="_blank">terminated in 2021</a> after serious concerns about mistreatment of detainees.</p>
+        
+        <p class="quote">"[Plymouth] didn't lose their contract with ICE unlike the Bristol County Jail and South Bay," said Pomerleau. "There are a few other facilities we used to have, but the problem with them losing the contracts is now, for example, there's no bed space for women."</p>
+        
+        <p>Limitations outlined in its contract permit only the jailing of male detainees over the age of 18, requiring other demographics to be sent out of state to facilities, where laws and policies differ.</p>
+        <div class="article-image">
+    <img src="todd.jpg" alt="Description">
+    <div class="image-caption">Todd Pomerleau, an immigration lawyer representing many high profile immigration cases in Massachusetts, sits in his office, November 25, 2025. Photo: Emily Glick</div>
 </div>
-        
-        <p>Pomerleau, a lawyer based in downtown Boston, frequently represents individuals who have been detained by ICE in the city but are later transferred to facilities in other states.</p>
-        
-        <p class="quote">"It seems like the men go to Buffalo, the women go to Vermont, then they wind up in Texas or Louisiana," said Pomerleau.</p>
-        
-        <p>ICE and the federal government have painted a narrative that they are rounding up the "worst of the worst," however 87.3% of ICE detainees at PCCF are rated at "No ICE Threat Level," according to <a href="https://www.ice.gov/detain/detention-management" target="_blank">data</a> released by the Department of Homeland Security in September 2025.</p>
-        
-        <p>According to ICE, the "threat level is determined by the criminality of a detainee, including the recency of the criminal behavior and its severity… If a detainee has no criminal convictions, he/she will be classified as 'No ICE Threat Level.'"</p>
-        
-        <p>A visit to ICE's <a href="https://www.ice.gov/newsroom" target="_blank">"newsroom,"</a> page on their main website clearly indicates the narrative they are attempting to portray. A subsection called "Worst of the Worst" outlines the latest high-profile arrests "to get a closer look at the criminal aliens we've recently taken into custody," according to the website.</p>
-        
-        <p>Here are two of their "newsroom" headlines from November.</p>
-        
-        <p class="quote"><a href="https://www.ice.gov/news/releases/ice-harris-county-sheriffs-office-arrest-multiple-criminal-illegal-aliens-accused" target="_blank">"ICE, Harris County Sheriff's Office arrest multiple criminal illegal aliens accused of repeatedly raping 12-year-old child smuggled into US during Obama administration."</a></p>
-        
-        <p class="quote"><a href="https://www.ice.gov/news/releases/twice-deported-child-predator-arrested-ice-after-violently-assaulting-officer-metal" target="_blank">"Twice deported child predator arrested by ICE after violently assaulting officer with metal cup during attempt to flee."</a></p>
-              <div class="article-image">
-    <img src="PCCF.jpg" alt="Description">
-    <div class="image-caption">The Plymouth County Correctional Facility, November 19, 2025. Photo: Asher Ben-Dashan</div>
+        
+        <p>Pomerleau, a lawyer based in downtown Boston, frequently represents individuals who have been detained by ICE in the city but are later transferred to facilities in other states.</p>
+        
+        <p class="quote">"It seems like the men go to Buffalo, the women go to Vermont, then they wind up in Texas or Louisiana," said Pomerleau.</p>
+        
+        <p>ICE and the federal government have painted a narrative that they are rounding up the "worst of the worst," however 87.3% of ICE detainees at PCCF are rated at "No ICE Threat Level," according to <a href="https://www.ice.gov/detain/detention-management" target="_blank">data</a> released by the Department of Homeland Security in September 2025.</p>
+        
+        <p>According to ICE, the "threat level is determined by the criminality of a detainee, including the recency of the criminal behavior and its severity… If a detainee has no criminal convictions, he/she will be classified as 'No ICE Threat Level.'"</p>
+        
+        <p>A visit to ICE's <a href="https://www.ice.gov/newsroom" target="_blank">"newsroom,"</a> page on their main website clearly indicates the narrative they are attempting to portray. A subsection called "Worst of the Worst" outlines the latest high-profile arrests "to get a closer look at the criminal aliens we've recently taken into custody," according to the website.</p>
+        
+        <p>Here are two of their "newsroom" headlines from November.</p>
+        
+        <p class="quote"><a href="https://www.ice.gov/news/releases/ice-harris-county-sheriffs-office-arrest-multiple-criminal-illegal-aliens-accused" target="_blank">"ICE, Harris County Sheriff's Office arrest multiple criminal illegal aliens accused of repeatedly raping 12-year-old child smuggled into US during Obama administration."</a></p>
+        
+        <p class="quote"><a href="https://www.ice.gov/news/releases/twice-deported-child-predator-arrested-ice-after-violently-assaulting-officer-metal" target="_blank">"Twice deported child predator arrested by ICE after violently assaulting officer with metal cup during attempt to flee."</a></p>
+              <div class="article-image">
+    <img src="PCCF.jpg" alt="Description">
+    <div class="image-caption">The Plymouth County Correctional Facility, November 19, 2025. Photo: Asher Ben-Dashan</div>
 </div>
-        
-        <p>The threat level rating system with which all detainees are evaluated is determined by ICE. Despite his view that ICE operations improve public safety in Massachusetts, McDonald expressed gratitude for the low number of detainees with criminal records in his facility.</p>
-        
-        <p class="quote">"I am glad that, for the most part, most of the individuals that come to be housed with us for any period of time are on the lower end of that threat level," said McDonald.</p>
+        
+        <p>The threat level rating system with which all detainees are evaluated is determined by ICE. Despite his view that ICE operations improve public safety in Massachusetts, McDonald expressed gratitude for the low number of detainees with criminal records in his facility.</p>
+        
+        <p class="quote">"I am glad that, for the most part, most of the individuals that come to be housed with us for any period of time are on the lower end of that threat level," said McDonald.</p>
 
-        <h2>PCCF and ICE: A Long Relationship</h2>
-        <div class="article-image">
-    <img src="PCCF sign.jpg" alt="Description">
-    <div class="image-caption">A sign visible upon entering the PCCF compound, November 19, 2025. Photo: Asher Ben-Dashan</div>
+        <h2>PCCF and ICE: A Long Relationship</h2>
+        <div class="article-image">
+    <img src="PCCF sign.jpg" alt="Description">
+    <div class="image-caption">A sign visible upon entering the PCCF compound, November 19, 2025. Photo: Asher Ben-Dashan</div>
 </div>
-        
-        <p>Plymouth County Correctional Facility's relationship with the federal government dates back to the early 1980s, according to McDonald.</p>
-        
-        <p class="quote">"The contracts that are in place here in Plymouth County have been in place here for far longer than I have been the sheriff," said McDonald.</p>
-        
-        <p>In January 2017, the federal government requested PCCF to enter into a 287(g) agreement, a different type of contract than the one PCCF currently maintains.</p>
-        
-        <p>Under this agreement, ICE was able to grant state and local law enforcement officers "the authority to perform specified immigration officer functions under the agency's direction and oversight," according to ICE's website.</p>
-         <div class="article-image">
-    <img src="ice-car.jpg" alt="Description">
-    <div class="image-caption">An ICE vehicle sits outside of the DHS/ICE Boston Field Office in Burlington, December 1, 2025. Photo: Emily Glick</div>
+        
+        <p>Plymouth County Correctional Facility's relationship with the federal government dates back to the early 1980s, according to McDonald.</p>
+        
+        <p class="quote">"The contracts that are in place here in Plymouth County have been in place here for far longer than I have been the sheriff," said McDonald.</p>
+        
+        <p>In January 2017, the federal government requested PCCF to enter into a 287(g) agreement, a different type of contract than the one PCCF currently maintains.</p>
+        
+        <p>Under this agreement, ICE was able to grant state and local law enforcement officers "the authority to perform specified immigration officer functions under the agency's direction and oversight," according to ICE's website.</p>
+         <div class="article-image">
+    <img src="ice-car.jpg" alt="Description">
+    <div class="image-caption">An ICE vehicle sits outside of the DHS/ICE Boston Field Office in Burlington, December 1, 2025. Photo: Emily Glick</div>
 </div>
-        
-        <p>The contract required PCCF to send law enforcement officers to be trained by ICE at a Federal Law Enforcement Training Facility (FLETC). These officers were given the authority to enforce federal laws and access national databases.</p>
-        
-        <p class="quote">"Our people would be able to check our individuals that were being booked in for crimes against the ICE database as to who was wanted by ICE, and we could put an initial detainer because we were authorized to do those types of things," said McDonald in an interview with <a href="https://www.wcvb.com/article/massachusetts-ice-holding-facility-plymouth-county/64445839" target="_blank">WCVB</a>.</p>
-        
-        <p>PCCF terminated its 287(g) contract with ICE in September 2021 when its federally trained officers retired. McDonald has chosen not to renew the agreement, despite requests from ICE, citing staffing and budget shortages.</p>
-        
-        <p>Despite PCCF's discontinuation of their 287(g) contract with ICE, McDonald is open about their current collaboration beyond the jailing of detainees.</p>
-        
-        <p class="quote">"If someone's serving a sentence, we can know fairly certainly when it is they're going to wrap up," said McDonald. "If we know that there is an individual who is wanted by ICE, they have a detainer on that person, we can let them know that 'hey, within the next week, this person is going to be released,' and ICE can make arrangements to take that person into custody."</p>
-        
-        <p>McDonald is currently lobbying for a Massachusetts state bill that would have a similar effect, enabling the transfer of those set to be released on bail to ICE custody.</p>
-        
-        <p><a href="https://malegislature.gov/Bills/194/HD4221.Html" target="_blank">Massachusetts Bill No. 2701</a>, filed on 1/17/2025, proposes that if any level of law enforcement in the state has custody of an individual and receives an ICE detainer request, they can hold the individual for up to 36 hours, even if the person would otherwise be released, such as after posting bail.</p>
-        
-        <p>McDonald views the bill as advantageous because it extends the amount of time that ICE has to detain individuals who have been arrested, booked and posted bail after court proceedings.</p>
-        
-        <p class="quote">"We would like the opportunity to contact ICE and say 'Hey… here's the person, can you tell me verbally over the phone?' 'Yes, we're going to come and get that person,'" said McDonald.</p>
-           <div class="article-image">
-    <img src="sheriff2.jpg" alt="Description">
-    <div class="image-caption">Sheriff Joseph D. McDonald Jr., November 19, 2025. Photo: Emily Glick</div>
-</div>
-
-        <h2>The Current Contract</h2>
-        
-        <p>The current contract between PCCF and ICE outlines details such as payment amounts to PCCF per detainee and per officer, what services detainees are allowed to use while in custody, the types of detainees the facility is allowed to hold and what data PCCF is required to track.</p>
-        
-        <p class="quote">"It's much like a hotel or an inn would be," said McDonald. "The number of people times the per diem rate. We're paid monthly."</p>
-        
-        <p>PCCF charges $215 per detainee, as well as $44.90 per hour for on-call guards, with an overtime rate of $67.35 per hour.</p>
-        
-        <p>In October alone, this daily bed rate brought in roughly $3.3 million for PCCF — a significant revenue stream for a single month.</p>
-        
-        <div id="revenueCalculator" style="margin: 3em 0;"></div>
-        
-        <p>In response to criticism over PCCF's revenue from ICE detention, McDonald notes that the money goes directly into Plymouth County's general fund.</p>
-        
-        <p class="quote">"We don't even have a say as to how it's spent," said McDonald. "That's all up to the legislature."</p>
-
-        <h2>A "Fluid" Detainee Population Under Trump</h2>
-        
-        <p>PCCF has seen a significant increase in the number of detainees since the beginning of the second Trump administration and the subsequent immigration "crackdown" that began in early 2025.</p>
-        
-        <p class="quote">"Those numbers have gone up to somewhere in the vicinity of about 500 [detainees per day] and that is where they've essentially held steady," said McDonald.</p>
-        
-        <p>On January 1, PCCF held 406 ICE detainees. By February 1, that number had risen to 503, and it reached as high as 547 by August 1.</p>
-        
-        <div id="detaineeChart" style="margin: 3em 0;"></div>
-        
-        <p class="quote">"I did anticipate an increase in those numbers. That was one of the issues that I think Trump wrote into office — said he was going to be tightening up on those types of issues and enforcing immigration law," said McDonald.</p>
-        
-        <p>During the Biden administration, the average ICE detainee population at PCCF dropped from 296 in 2019 to around 100 throughout 2021, 2022, and 2023.</p>
-        
-        <div id="fiscalYearChart" style="margin: 3em 0;"></div>
-        
-        <p>Data from the Plymouth Sheriff's Office also shows that PCCF is often over capacity at the beginning of day count, even with a low average length of stay. This underscores both the high volume of arrests and the transient nature of ICE's detention process, with detainees being moved between facilities on a daily basis.</p>
-        
-        <p class="quote">"The population does seem to be a bit more dynamic in the sense that they come and they go," said McDonald. "It may well be that half of that population is different than the half that we had yesterday."</p>
-        
-        <p>The numbers in the October daily detainee count frequently rise above the allotted bed space of 526 for the "beginning of day" count, but fall back down for the "End of day" count. On October 1, the count was 533 at the beginning of the day, but fell to 515 by the end of the day. On October 27 the count was 536 at the beginning of the day, but fell to 516 by the end of the day.</p>
-        
-        <div id="octoberChart" style="margin: 3em 0;"></div>
-        
-        <p>High-frequency transfers of detainees have been a central characteristic of the Trump administration's immigration policy, according to Pomerleau. Constant relocations make it difficult for family and friends to maintain contact and create significant barriers for legal representation, undermining detainees' ability to access due process.</p>
-        
-        <p>Pomerleau explained that part of the problem stems from disorganization and a lack of clear communication.</p>
-        
-        <p class="quote">"This is something they do right now. They have a database and they don't update it frequently," said Pomerleau. "They don't respond to calls from lawyers, because they know when the lawyers are calling, it's for a reason."</p>
-     <div class="article-image">
-    <img src="plymouth-end.jpg" alt="Description">
-    <div class="image-caption">A rusty anchor and boat rotor blade sit on a dock next to a reproduction of the Mayflower ship in Plymouth, November 19, 2025. Photo: Emily Glick</div>
+        
+        <p>The contract required PCCF to send law enforcement officers to be trained by ICE at a Federal Law Enforcement Training Facility (FLETC). These officers were given the authority to enforce federal laws and access national databases.</p>
+        
+        <p class="quote">"Our people would be able to check our individuals that were being booked in for crimes against the ICE database as to who was wanted by ICE, and we could put an initial detainer because we were authorized to do those types of things," said McDonald in an interview with <a href="https://www.wcvb.com/article/massachusetts-ice-holding-facility-plymouth-county/64445839" target="_blank">WCVB</a>.</p>
+        
+        <p>PCCF terminated its 287(g) contract with ICE in September 2021 when its federally trained officers retired. McDonald has chosen not to renew the agreement, despite requests from ICE, citing staffing and budget shortages.</p>
+        
+        <p>Despite PCCF's discontinuation of their 287(g) contract with ICE, McDonald is open about their current collaboration beyond the jailing of detainees.</p>
+        
+        <p class="quote">"If someone's serving a sentence, we can know fairly certainly when it is they're going to wrap up," said McDonald. "If we know that there is an individual who is wanted by ICE, they have a detainer on that person, we can let them know that 'hey, within the next week, this person is going to be released,' and ICE can make arrangements to take that person into custody."</p>
+        
+        <p>McDonald is currently lobbying for a Massachusetts state bill that would have a similar effect, enabling the transfer of those set to be released on bail to ICE custody.</p>
+        
+        <p><a href="https://malegislature.gov/Bills/194/HD4221.Html" target="_blank">Massachusetts Bill No. 2701</a>, filed on 1/17/2025, proposes that if any level of law enforcement in the state has custody of an individual and receives an ICE detainer request, they can hold the individual for up to 36 hours, even if the person would otherwise be released, such as after posting bail.</p>
+        
+        <p>McDonald views the bill as advantageous because it extends the amount of time that ICE has to detain individuals who have been arrested, booked and posted bail after court proceedings.</p>
+        
+        <p class="quote">"We would like the opportunity to contact ICE and say 'Hey… here's the person, can you tell me verbally over the phone?' 'Yes, we're going to come and get that person,'" said McDonald.</p>
+           <div class="article-image">
+    <img src="sheriff2.jpg" alt="Description">
+    <div class="image-caption">Sheriff Joseph D. McDonald Jr., November 19, 2025. Photo: Emily Glick</div>
 </div>
 
-    <script>
-        // Data from CSV
-        const data = {
-            threat1: 34,
-            threat2: 13,
-            threat3: 11,
-            noThreat: 392
-        };
+        <h2>The Current Contract</h2>
+        
+        <p>The current contract between PCCF and ICE outlines details such as payment amounts to PCCF per detainee and per officer, what services detainees are allowed to use while in custody, the types of detainees the facility is allowed to hold and what data PCCF is required to track.</p>
+        
+        <p class="quote">"It's much like a hotel or an inn would be," said McDonald. "The number of people times the per diem rate. We're paid monthly."</p>
+        
+        <p>PCCF charges $215 per detainee, as well as $44.90 per hour for on-call guards, with an overtime rate of $67.35 per hour.</p>
+        
+        <p>In October alone, this daily bed rate brought in roughly $3.3 million for PCCF — a significant revenue stream for a single month.</p>
+        
+        <div id="revenueCalculator" style="margin: 3em 0;"></div>
+        
+        <p>In response to criticism over PCCF's revenue from ICE detention, McDonald notes that the money goes directly into Plymouth County's general fund.</p>
+        
+        <p class="quote">"We don't even have a say as to how it's spent," said McDonald. "That's all up to the legislature."</p>
 
-        const totalBeds = 449;
-        const grid = document.getElementById('bedsGrid');
+        <h2>A "Fluid" Detainee Population Under Trump</h2>
+        
+        <p>PCCF has seen a significant increase in the number of detainees since the beginning of the second Trump administration and the subsequent immigration "crackdown" that began in early 2025.</p>
+        
+        <p class="quote">"Those numbers have gone up to somewhere in the vicinity of about 500 [detainees per day] and that is where they've essentially held steady," said McDonald.</p>
+        
+        <p>On January 1, PCCF held 406 ICE detainees. By February 1, that number had risen to 503, and it reached as high as 547 by August 1.</p>
+        
+        <div id="detaineeChart" style="margin: 3em 0;"></div>
+        
+        <p class="quote">"I did anticipate an increase in those numbers. That was one of the issues that I think Trump wrote into office — said he was going to be tightening up on those types of issues and enforcing immigration law," said McDonald.</p>
+        
+        <p>During the Biden administration, the average ICE detainee population at PCCF dropped from 296 in 2019 to around 100 throughout 2021, 2022, and 2023.</p>
+        
+        <div id="fiscalYearChart" style="margin: 3em 0;"></div>
+        
+        <p>Data from the Plymouth Sheriff's Office also shows that PCCF is often over capacity at the beginning of day count, even with a low average length of stay. This underscores both the high volume of arrests and the transient nature of ICE's detention process, with detainees being moved between facilities on a daily basis.</p>
+        
+        <p class="quote">"The population does seem to be a bit more dynamic in the sense that they come and they go," said McDonald. "It may well be that half of that population is different than the half that we had yesterday."</p>
+        
+        <p>The numbers in the October daily detainee count frequently rise above the allotted bed space of 526 for the "beginning of day" count, but fall back down for the "End of day" count. On October 1, the count was 533 at the beginning of the day, but fell to 515 by the end of the day. On October 27 the count was 536 at the beginning of the day, but fell to 516 by the end of the day.</p>
+        
+        <div id="octoberChart" style="margin: 3em 0;"></div>
+        
+        <p>High-frequency transfers of detainees have been a central characteristic of the Trump administration's immigration policy, according to Pomerleau. Constant relocations make it difficult for family and friends to maintain contact and create significant barriers for legal representation, undermining detainees' ability to access due process.</p>
+        
+        <p>Pomerleau explained that part of the problem stems from disorganization and a lack of clear communication.</p>
+        
+        <p class="quote">"This is something they do right now. They have a database and they don't update it frequently," said Pomerleau. "They don't respond to calls from lawyers, because they know when the lawyers are calling, it's for a reason."</p>
+     <div class="article-image">
+    <img src="plymouth-end.jpg" alt="Description">
+    <div class="image-caption">A rusty anchor and boat rotor blade sit on a dock next to a reproduction of the Mayflower ship in Plymouth, November 19, 2025. Photo: Emily Glick</div>
+</div>
 
-        // Create all 449 beds with bed icon SVG
-        const beds = [];
-        for (let i = 0; i < totalBeds; i++) {
-            const bed = document.createElement('div');
-            bed.className = 'bed';
-            bed.dataset.index = i;
-            
-            // Create bed icon SVG
-            bed.innerHTML = `
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <rect class="bed-frame" x="2" y="10" width="20" height="8" rx="1"/>
-                    <rect class="bed-frame" x="2" y="8" width="4" height="2" rx="0.5"/>
-                    <rect class="bed-frame" x="18" y="8" width="4" height="2" rx="0.5"/>
-                    <rect class="bed-frame" x="4" y="12" width="16" height="4" rx="0.5"/>
-                </svg>
-            `;
-            
-            grid.appendChild(bed);
-            beds.push(bed);
-        }
+    <script>
+        // Data from CSV
+        const data = {
+            threat1: 34,
+            threat2: 13,
+            threat3: 11,
+            noThreat: 392
+        };
 
-        // Define which beds get which classification
-        let currentIndex = 0;
-        
-        // Threat Level 1
-        const threat1Beds = beds.slice(currentIndex, currentIndex + data.threat1);
-        currentIndex += data.threat1;
-        
-        // Threat Level 2
-        const threat2Beds = beds.slice(currentIndex, currentIndex + data.threat2);
-        currentIndex += data.threat2;
-        
-        // Threat Level 3
-        const threat3Beds = beds.slice(currentIndex, currentIndex + data.threat3);
-        currentIndex += data.threat3;
-        
-        // No Threat Level
-        const noThreatBeds = beds.slice(currentIndex, currentIndex + data.noThreat);
+        const totalBeds = 449;
+        const grid = document.getElementById('bedsGrid');
 
-        // Scroll animation
-        function updateBeds() {
-            const vizContainer = document.querySelector('.viz-container');
-            const rect = vizContainer.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            // Calculate scroll progress through the viz container (0 to 1)
-            const scrollProgress = Math.max(0, Math.min(1, 
-                (windowHeight - rect.top) / (windowHeight + rect.height * 0.7)
-            ));
+        // Create all 449 beds with bed icon SVG
+        const beds = [];
+        for (let i = 0; i < totalBeds; i++) {
+            const bed = document.createElement('div');
+            bed.className = 'bed';
+            bed.dataset.index = i;
+            
+            // Create bed icon SVG
+            bed.innerHTML = `
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <rect class="bed-frame" x="2" y="10" width="20" height="8" rx="1"/>
+                    <rect class="bed-frame" x="2" y="8" width="4" height="2" rx="0.5"/>
+                    <rect class="bed-frame" x="18" y="8" width="4" height="2" rx="0.5"/>
+                    <rect class="bed-frame" x="4" y="12" width="16" height="4" rx="0.5"/>
+                </svg>
+            `;
+            
+            grid.appendChild(bed);
+            beds.push(bed);
+        }
 
-            // Calculate how many beds should be colored based on scroll (slower)
-            const totalOccupied = data.threat1 + data.threat2 + data.threat3 + data.noThreat;
-            const bedsToColor = Math.floor(scrollProgress * totalOccupied * 1.2);
+        // Define which beds get which classification
+        let currentIndex = 0;
+        
+        // Threat Level 1
+        const threat1Beds = beds.slice(currentIndex, currentIndex + data.threat1);
+        currentIndex += data.threat1;
+        
+        // Threat Level 2
+        const threat2Beds = beds.slice(currentIndex, currentIndex + data.threat2);
+        currentIndex += data.threat2;
+        
+        // Threat Level 3
+        const threat3Beds = beds.slice(currentIndex, currentIndex + data.threat3);
+        currentIndex += data.threat3;
+        
+        // No Threat Level
+        const noThreatBeds = beds.slice(currentIndex, currentIndex + data.noThreat);
 
-            // Color the beds progressively
-            let colored = 0;
-            
-            // Color Threat Level 1 beds
-            threat1Beds.forEach(bed => {
-                if (colored < bedsToColor) {
-                    bed.classList.add('threat-1');
-                    colored++;
-                } else {
-                    bed.classList.remove('threat-1');
-                }
-            });
-            
-            // Color Threat Level 2 beds
-            threat2Beds.forEach(bed => {
-                if (colored < bedsToColor) {
-                    bed.classList.add('threat-2');
-                    colored++;
-                } else {
-                    bed.classList.remove('threat-2');
-                }
-            });
-            
-            // Color Threat Level 3 beds
-            threat3Beds.forEach(bed => {
-                if (colored < bedsToColor) {
-                    bed.classList.add('threat-3');
-                    colored++;
-                } else {
-                    bed.classList.remove('threat-3');
-                }
-            });
-            
-            // No Threat beds
-            noThreatBeds.forEach(bed => {
-                if (colored < bedsToColor) {
-                    bed.classList.add('no-threat');
-                    colored++;
-                } else {
-                    bed.classList.remove('no-threat');
-                }
-            });
-        }
+        // Scroll animation
+        function updateBeds() {
+            const vizContainer = document.querySelector('.viz-container');
+            const rect = vizContainer.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Calculate scroll progress through the viz container (0 to 1)
+            const scrollProgress = Math.max(0, Math.min(1, 
+                (windowHeight - rect.top) / (windowHeight + rect.height * 0.7)
+            ));
 
-        // Update on scroll
-        window.addEventListener('scroll', updateBeds);
-        
-        // Initial update
-        updateBeds();
+            // Calculate how many beds should be colored based on scroll (slower)
+            const totalOccupied = data.threat1 + data.threat2 + data.threat3 + data.noThreat;
+            const bedsToColor = Math.floor(scrollProgress * totalOccupied * 1.2);
 
-        // Revenue Calculator Component
-        function RevenueCalculator() {
-            const container = document.getElementById('revenueCalculator');
-            
-            let quantity = '15,556';
-            const baseAmount = 215;
-            
-            const calculateTotal = () => {
-                const num = parseFloat(quantity.replace(/,/g, ''));
-                if (isNaN(num) || num < 0) return 0;
-                return num * baseAmount;
-            };
-            
-            const formatCurrency = (amount) => {
-                return new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0
-                }).format(amount);
-            };
-            
-            const formatNumber = (num) => {
-                return new Intl.NumberFormat('en-US').format(num);
-            };
-            
-            const render = () => {
-                container.innerHTML = `
-                    <div style="max-width: 500px; margin: 0 auto; padding: 30px; background: #f8f9fa; border: 1px solid #e0e0e0;">
-                        <h3 style="font-family: 'Work Sans', sans-serif; font-size: 1.3em; font-weight: 600; color: #1a1a1a; margin-bottom: 10px;">
-                            Calculate what Plymouth County could be making from ICE detainees
-                        </h3>
-                        <p style="font-family: 'Work Sans', sans-serif; font-size: 0.9em; color: #666; margin-bottom: 25px;">
-                            There were 15,556 "end of day" detainees in October
-                        </p>
-                        <div>
-                            <label for="quantityInput" style="display: block; font-family: 'Work Sans', sans-serif; font-size: 0.95em; font-weight: 500; color: #333; margin-bottom: 10px;">
-                                Number of detainees:
-                            </label>
-                            <input
-                                id="quantityInput"
-                                type="text"
-                                value="${quantity}"
-                                style="width: 100%; padding: 12px; border: 1px solid #ccc; font-size: 1.1em; font-family: 'Work Sans', sans-serif;"
-                            />
-                        </div>
-                        
-                        <div style="padding-top: 25px; margin-top: 25px; border-top: 1px solid #ddd;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Work Sans', sans-serif; font-size: 0.95em; color: #666; margin-bottom: 15px;">
-                                <span>Bed day rate:</span>
-                                <span>${formatCurrency(baseAmount)}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Work Sans', sans-serif;">
-                                <span style="font-weight: 600; color: #1a1a1a;">Total:</span>
-                                <span style="font-size: 2em; font-weight: 700; color: #1a1a1a;">
-                                    ${formatCurrency(calculateTotal())}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                
-                const input = container.querySelector('#quantityInput');
-                input.addEventListener('input', (e) => {
-                    const value = e.target.value.replace(/,/g, '');
-                    if (value === '' || !isNaN(value)) {
-                        quantity = value === '' ? '' : formatNumber(parseFloat(value));
-                        render();
-                    }
-                });
-            };
-            
-            render();
-        }
-        
-        // Initialize revenue calculator
-        RevenueCalculator();
+            // Color the beds progressively
+            let colored = 0;
+            
+            // Color Threat Level 1 beds
+            threat1Beds.forEach(bed => {
+                if (colored < bedsToColor) {
+                    bed.classList.add('threat-1');
+                    colored++;
+                } else {
+                    bed.classList.remove('threat-1');
+                }
+            });
+            
+            // Color Threat Level 2 beds
+            threat2Beds.forEach(bed => {
+                if (colored < bedsToColor) {
+                    bed.classList.add('threat-2');
+                    colored++;
+                } else {
+                    bed.classList.remove('threat-2');
+                }
+            });
+            
+            // Color Threat Level 3 beds
+            threat3Beds.forEach(bed => {
+                if (colored < bedsToColor) {
+                    bed.classList.add('threat-3');
+                    colored++;
+                } else {
+                    bed.classList.remove('threat-3');
+                }
+            });
+            
+            // No Threat beds
+            noThreatBeds.forEach(bed => {
+                if (colored < bedsToColor) {
+                    bed.classList.add('no-threat');
+                    colored++;
+                } else {
+                    bed.classList.remove('no-threat');
+                }
+            });
+        }
 
-        // Detainee Chart
-        function DetaineeChart() {
-            const container = document.getElementById('detaineeChart');
-            
-            const data = [
-                { month: 'Jan', count: 406 },
-                { month: 'Feb', count: 503 },
-                { month: 'Mar', count: 523 },
-                { month: 'Apr', count: 508 },
-                { month: 'May', count: 475 },
-                { month: 'Jun', count: 516 },
-                { month: 'Jul', count: 502 },
-                { month: 'Aug', count: 547 },
-                { month: 'Sep', count: 520 },
-                { month: 'Oct', count: 485 },
-                { month: 'Nov', count: 518 }
-            ];
+        // Update on scroll
+        window.addEventListener('scroll', updateBeds);
+        
+        // Initial update
+        updateBeds();
 
-            const width = 1000;
-            const height = 500;
-            const margin = { top: 20, right: 40, bottom: 60, left: 80 };
-            const chartWidth = width - margin.left - margin.right;
-            const chartHeight = height - margin.top - margin.bottom;
+        // Revenue Calculator Component
+        function RevenueCalculator() {
+            const container = document.getElementById('revenueCalculator');
+            
+            let quantity = '15,556';
+            const baseAmount = 215;
+            
+            const calculateTotal = () => {
+                const num = parseFloat(quantity.replace(/,/g, ''));
+                if (isNaN(num) || num < 0) return 0;
+                return num * baseAmount;
+            };
+            
+            const formatCurrency = (amount) => {
+                return new Intl.NumberFormat('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0
+                }).format(amount);
+            };
+            
+            const formatNumber = (num) => {
+                return new Intl.NumberFormat('en-US').format(num);
+            };
+            
+            const render = () => {
+                container.innerHTML = `
+                    <div style="max-width: 500px; margin: 0 auto; padding: 30px; background: #f8f9fa; border: 1px solid #e0e0e0;">
+                        <h3 style="font-family: 'Crimson Text', Georgia, serif; font-size: 1.3em; font-weight: 600; color: #1a1a1a; margin-bottom: 10px;">
+                            Calculate what Plymouth County could be making from ICE detainees
+                        </h3>
+                        <p style="font-family: 'Crimson Text', Georgia, serif; font-size: 0.9em; color: #666; margin-bottom: 25px;">
+                            There were 15,556 "end of day" detainees in October
+                        </p>
+                        <div>
+                            <label for="quantityInput" style="display: block; font-family: 'Crimson Text', Georgia, serif; font-size: 0.95em; font-weight: 500; color: #333; margin-bottom: 10px;">
+                                Number of detainees:
+                            </label>
+                            <input
+                                id="quantityInput"
+                                type="text"
+                                value="${quantity}"
+                                style="width: 100%; padding: 12px; border: 1px solid #ccc; font-size: 1.1em; font-family: 'Crimson Text', Georgia, serif;"
+                            />
+                        </div>
+                        
+                        <div style="padding-top: 25px; margin-top: 25px; border-top: 1px solid #ddd;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Crimson Text', Georgia, serif; font-size: 0.95em; color: #666; margin-bottom: 15px;">
+                                <span>Bed day rate:</span>
+                                <span>${formatCurrency(baseAmount)}</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-family: 'Crimson Text', Georgia, serif;">
+                                <span style="font-weight: 600; color: #1a1a1a;">Total:</span>
+                                <span style="font-size: 2em; font-weight: 700; color: #1a1a1a;">
+                                    ${formatCurrency(calculateTotal())}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                const input = container.querySelector('#quantityInput');
+                input.addEventListener('input', (e) => {
+                    const value = e.target.value.replace(/,/g, '');
+                    if (value === '' || !isNaN(value)) {
+                        quantity = value === '' ? '' : formatNumber(parseFloat(value));
+                        render();
+                    }
+                });
+            };
+            
+            render();
+        }
+        
+        // Initialize revenue calculator
+        RevenueCalculator();
 
-            // Scales - spread evenly across the full width
-            const xScale = (index) => {
-                return (index / (data.length - 1)) * chartWidth;
-            };
-            const yMin = 400;
-            const yMax = 560;
-            const yScale = (value) => chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
+        // Detainee Chart
+        function DetaineeChart() {
+            const container = document.getElementById('detaineeChart');
+            
+            const data = [
+                { month: 'Jan', count: 406 },
+                { month: 'Feb', count: 503 },
+                { month: 'Mar', count: 523 },
+                { month: 'Apr', count: 508 },
+                { month: 'May', count: 475 },
+                { month: 'Jun', count: 516 },
+                { month: 'Jul', count: 502 },
+                { month: 'Aug', count: 547 },
+                { month: 'Sep', count: 520 },
+                { month: 'Oct', count: 485 },
+                { month: 'Nov', count: 518 }
+            ];
 
-            // Create path for area
-            let areaPath = `M ${xScale(0)} ${yScale(data[0].count)}`;
-            for (let i = 1; i < data.length; i++) {
-                areaPath += ` L ${xScale(i)} ${yScale(data[i].count)}`;
-            }
-            areaPath += ` L ${xScale(data.length - 1)} ${chartHeight}`;
-            areaPath += ` L ${xScale(0)} ${chartHeight} Z`;
+            const width = 1000;
+            const height = 500;
+            const margin = { top: 20, right: 40, bottom: 60, left: 80 };
+            const chartWidth = width - margin.left - margin.right;
+            const chartHeight = height - margin.top - margin.bottom;
 
-            // Create path for line
-            let linePath = `M ${xScale(0)} ${yScale(data[0].count)}`;
-            for (let i = 1; i < data.length; i++) {
-                linePath += ` L ${xScale(i)} ${yScale(data[i].count)}`;
-            }
+            // Scales - spread evenly across the full width
+            const xScale = (index) => {
+                return (index / (data.length - 1)) * chartWidth;
+            };
+            const yMin = 400;
+            const yMax = 560;
+            const yScale = (value) => chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
 
-            // Y-axis ticks
-            const yTicks = [410, 430, 450, 470, 490, 510, 526, 540, 560];
+            // Create path for area
+            let areaPath = `M ${xScale(0)} ${yScale(data[0].count)}`;
+            for (let i = 1; i < data.length; i++) {
+                areaPath += ` L ${xScale(i)} ${yScale(data[i].count)}`;
+            }
+            areaPath += ` L ${xScale(data.length - 1)} ${chartHeight}`;
+            areaPath += ` L ${xScale(0)} ${chartHeight} Z`;
 
-            container.innerHTML = `
-                <div style="background: white; padding: 40px; border: 1px solid #e0e0e0; max-width: 1100px; margin: 0 auto; overflow: hidden;">
-                    <h3 style="font-family: 'Work Sans', sans-serif; font-size: 1.8em; font-weight: 600; color: #1a1a1a; margin-bottom: 10px;">
-                        Detainee Count - First of the Month
-                    </h3>
-                    <p style="font-family: 'Work Sans', sans-serif; font-size: 1em; color: #666; margin-bottom: 30px;">
-                        January 2025 - November 2025
-                    </p>
-                    
-                    <div style="width: 100%; overflow-x: auto;">
-                        <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="font-family: 'Work Sans', sans-serif; display: block; max-width: 100%; height: auto;">
-                            <defs>
-                                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#5b8ff9;stop-opacity:0.5" />
-                                    <stop offset="100%" style="stop-color:#5b8ff9;stop-opacity:0.1" />
-                                </linearGradient>
-                            </defs>
-                            
-                            <g transform="translate(${margin.left}, ${margin.top})">
-                                <!-- Grid lines -->
-                                ${yTicks.map(tick => `
-                                    <line 
-                                        x1="0" 
-                                        y1="${yScale(tick)}" 
-                                        x2="${chartWidth}" 
-                                        y2="${yScale(tick)}" 
-                                        stroke="#e8e8e8" 
-                                        stroke-width="1"
-                                    />
-                                `).join('')}
-                                
-                                <!-- Red reference line at 526 -->
-                                <line 
-                                    x1="0" 
-                                    y1="${yScale(526)}" 
-                                    x2="${chartWidth}" 
-                                    y2="${yScale(526)}" 
-                                    stroke="#ef4444" 
-                                    stroke-width="2.5" 
-                                    stroke-dasharray="8,4"
-                                />
-                                
-                                <!-- Area -->
-                                <path 
-                                    d="${areaPath}" 
-                                    fill="url(#areaGradient)"
-                                />
-                                
-                                <!-- Line -->
-                                <path 
-                                    d="${linePath}" 
-                                    fill="none" 
-                                    stroke="#3b7dd6" 
-                                    stroke-width="3"
-                                />
-                                
-                                <!-- Data points -->
-                                ${data.map((d, i) => `
-                                    <circle 
-                                        cx="${xScale(i)}" 
-                                        cy="${yScale(d.count)}" 
-                                        r="5" 
-                                        fill="#3b7dd6" 
-                                        stroke="white" 
-                                        stroke-width="2"
-                                        class="data-point"
-                                        data-month="${d.month}"
-                                        data-count="${d.count}"
-                                        style="cursor: pointer;"
-                                    />
-                                `).join('')}
-                                
-                                <!-- X-axis -->
-                                <line 
-                                    x1="0" 
-                                    y1="${chartHeight}" 
-                                    x2="${chartWidth}" 
-                                    y2="${chartHeight}" 
-                                    stroke="#94a3b8" 
-                                    stroke-width="1.5"
-                                />
-                                
-                                <!-- X-axis labels -->
-                                ${data.map((d, i) => `
-                                    <text 
-                                        x="${xScale(i)}" 
-                                        y="${chartHeight + 30}" 
-                                        text-anchor="middle" 
-                                        fill="#64748b" 
-                                        font-size="15"
-                                        font-weight="400"
-                                    >
-                                        ${d.month}
-                                    </text>
-                                `).join('')}
-                                
-                                <!-- Y-axis -->
-                                <line 
-                                    x1="0" 
-                                    y1="0" 
-                                    x2="0" 
-                                    y2="${chartHeight}" 
-                                    stroke="#94a3b8" 
-                                    stroke-width="1.5"
-                                />
-                                
-                                <!-- Y-axis labels -->
-                                ${yTicks.map(tick => `
-                                    <text 
-                                        x="-15" 
-                                        y="${yScale(tick)}" 
-                                        text-anchor="end" 
-                                        dominant-baseline="middle" 
-                                        fill="${tick === 526 ? '#ef4444' : '#64748b'}" 
-                                        font-size="15"
-                                        font-weight="${tick === 526 ? '700' : '400'}"
-                                    >
-                                        ${tick}
-                                    </text>
-                                `).join('')}
-                                
-                                <!-- Y-axis label -->
-                                <text 
-                                    transform="rotate(-90)" 
-                                    x="${-chartHeight / 2}" 
-                                    y="-55" 
-                                    text-anchor="middle" 
-                                    fill="#334155" 
-                                    font-size="15"
-                                    font-weight="400"
-                                >
-                                    Number of detainees
-                                </text>
-                            </g>
-                        </svg>
-                    </div>
-                    
-                    <div id="chartTooltip" style="
-                        position: absolute;
-                        background: white;
-                        border: 1px solid #e2e8f0;
-                        border-radius: 8px;
-                        padding: 8px 12px;
-                        display: none;
-                        pointer-events: none;
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                        z-index: 1000;
-                    "></div>
-                </div>
-            `;
+            // Create path for line
+            let linePath = `M ${xScale(0)} ${yScale(data[0].count)}`;
+            for (let i = 1; i < data.length; i++) {
+                linePath += ` L ${xScale(i)} ${yScale(data[i].count)}`;
+            }
 
-            // Add tooltip interaction
-            const points = container.querySelectorAll('.data-point');
-            const tooltip = container.querySelector('#chartTooltip');
-            
-            points.forEach(point => {
-                point.addEventListener('mouseenter', (e) => {
-                    const month = e.target.getAttribute('data-month');
-                    const count = e.target.getAttribute('data-count');
-                    const rect = e.target.getBoundingClientRect();
-                    
-                    tooltip.innerHTML = `
-                        <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">${month}</div>
-                        <div style="color: #3b82f6;">Count: ${count}</div>
-                    `;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = (rect.left + window.scrollX) + 'px';
-                    tooltip.style.top = (rect.top + window.scrollY - 60) + 'px';
-                });
-                
-                point.addEventListener('mouseleave', () => {
-                    tooltip.style.display = 'none';
-                });
-            });
-        }
-        
-        // Initialize detainee chart
-        DetaineeChart();
+            // Y-axis ticks
+            const yTicks = [410, 430, 450, 470, 490, 510, 526, 540, 560];
 
-        // October Beginning vs End of Day Chart
-        function OctoberChart() {
-            const container = document.getElementById('octoberChart');
-            
-            const data = [
-                {date: 1, day: "Wed", beginning: 485, end: 475},
-                {date: 2, day: "Thu", beginning: 490, end: 477},
-                {date: 3, day: "Fri", beginning: 500, end: 489},
-                {date: 4, day: "Sat", beginning: 480, end: 473},
-                {date: 5, day: "Sun", beginning: 478, end: 476},
-                {date: 6, day: "Mon", beginning: 483, end: 467},
-                {date: 7, day: "Tue", beginning: 497, end: 481},
-                {date: 8, day: "Wed", beginning: 501, end: 482},
-                {date: 9, day: "Thu", beginning: 519, end: 499},
-                {date: 10, day: "Fri", beginning: 523, end: 516},
-                {date: 11, day: "Sat", beginning: 518, end: 511},
-                {date: 12, day: "Sun", beginning: 517, end: 515},
-                {date: 13, day: "Mon", beginning: 502, end: 497},
-                {date: 14, day: "Tue", beginning: 515, end: 502},
-                {date: 15, day: "Wed", beginning: 518, end: 497},
-                {date: 16, day: "Thu", beginning: 519, end: 503},
-                {date: 17, day: "Fri", beginning: 533, end: 515},
-                {date: 18, day: "Sat", beginning: 520, end: 516},
-                {date: 19, day: "Sun", beginning: 525, end: 520},
-                {date: 20, day: "Mon", beginning: 520, end: 515},
-                {date: 21, day: "Tue", beginning: 533, end: 512},
-                {date: 22, day: "Wed", beginning: 508, end: 496},
-                {date: 23, day: "Thu", beginning: 508, end: 506},
-                {date: 24, day: "Fri", beginning: 531, end: 507},
-                {date: 25, day: "Sat", beginning: 507, end: 498},
-                {date: 26, day: "Sun", beginning: 516, end: 507},
-                {date: 27, day: "Mon", beginning: 536, end: 516},
-                {date: 28, day: "Tue", beginning: 526, end: 515},
-                {date: 29, day: "Wed", beginning: 532, end: 524},
-                {date: 30, day: "Thu", beginning: 525, end: 525},
-                {date: 31, day: "Fri", beginning: 539, end: 524}
-            ];
+            container.innerHTML = `
+                <div style="background: white; padding: 40px; border: 1px solid #e0e0e0; max-width: 1100px; margin: 0 auto; overflow: hidden;">
+                    <h3 style="font-family: 'Crimson Text', Georgia, serif; font-size: 1.8em; font-weight: 600; color: #1a1a1a; margin-bottom: 10px;">
+                        Detainee Count - First of the Month
+                    </h3>
+                    <p style="font-family: 'Crimson Text', Georgia, serif; font-size: 1em; color: #666; margin-bottom: 30px;">
+                        January 2025 - November 2025
+                    </p>
+                    
+                    <div style="width: 100%; overflow-x: auto;">
+                        <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="font-family: 'Crimson Text', Georgia, serif; display: block; max-width: 100%; height: auto;">
+                            <defs>
+                                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#5b8ff9;stop-opacity:0.5" />
+                                    <stop offset="100%" style="stop-color:#5b8ff9;stop-opacity:0.1" />
+                                </linearGradient>
+                            </defs>
+                            
+                            <g transform="translate(${margin.left}, ${margin.top})">
+                                <!-- Grid lines -->
+                                ${yTicks.map(tick => `
+                                    <line 
+                                        x1="0" 
+                                        y1="${yScale(tick)}" 
+                                        x2="${chartWidth}" 
+                                        y2="${yScale(tick)}" 
+                                        stroke="#e8e8e8" 
+                                        stroke-width="1"
+                                    />
+                                `).join('')}
+                                
+                                <!-- Red reference line at 526 -->
+                                <line 
+                                    x1="0" 
+                                    y1="${yScale(526)}" 
+                                    x2="${chartWidth}" 
+                                    y2="${yScale(526)}" 
+                                    stroke="#ef4444" 
+                                    stroke-width="2.5" 
+                                    stroke-dasharray="8,4"
+                                />
+                                
+                                <!-- Area -->
+                                <path 
+                                    d="${areaPath}" 
+                                    fill="url(#areaGradient)"
+                                />
+                                
+                                <!-- Line -->
+                                <path 
+                                    d="${linePath}" 
+                                    fill="none" 
+                                    stroke="#3b7dd6" 
+                                    stroke-width="3"
+                                />
+                                
+                                <!-- Data points -->
+                                ${data.map((d, i) => `
+                                    <circle 
+                                        cx="${xScale(i)}" 
+                                        cy="${yScale(d.count)}" 
+                                        r="5" 
+                                        fill="#3b7dd6" 
+                                        stroke="white" 
+                                        stroke-width="2"
+                                        class="data-point"
+                                        data-month="${d.month}"
+                                        data-count="${d.count}"
+                                        style="cursor: pointer;"
+                                    />
+                                `).join('')}
+                                
+                                <!-- X-axis -->
+                                <line 
+                                    x1="0" 
+                                    y1="${chartHeight}" 
+                                    x2="${chartWidth}" 
+                                    y2="${chartHeight}" 
+                                    stroke="#94a3b8" 
+                                    stroke-width="1.5"
+                                />
+                                
+                                <!-- X-axis labels -->
+                                ${data.map((d, i) => `
+                                    <text 
+                                        x="${xScale(i)}" 
+                                        y="${chartHeight + 30}" 
+                                        text-anchor="middle" 
+                                        fill="#64748b" 
+                                        font-size="15"
+                                        font-weight="400"
+                                    >
+                                        ${d.month}
+                                    </text>
+                                `).join('')}
+                                
+                                <!-- Y-axis -->
+                                <line 
+                                    x1="0" 
+                                    y1="0" 
+                                    x2="0" 
+                                    y2="${chartHeight}" 
+                                    stroke="#94a3b8" 
+                                    stroke-width="1.5"
+                                />
+                                
+                                <!-- Y-axis labels -->
+                                ${yTicks.map(tick => `
+                                    <text 
+                                        x="-15" 
+                                        y="${yScale(tick)}" 
+                                        text-anchor="end" 
+                                        dominant-baseline="middle" 
+                                        fill="${tick === 526 ? '#ef4444' : '#64748b'}" 
+                                        font-size="15"
+                                        font-weight="${tick === 526 ? '700' : '400'}"
+                                    >
+                                        ${tick}
+                                    </text>
+                                `).join('')}
+                                
+                                <!-- Y-axis label -->
+                                <text 
+                                    transform="rotate(-90)" 
+                                    x="${-chartHeight / 2}" 
+                                    y="-55" 
+                                    text-anchor="middle" 
+                                    fill="#334155" 
+                                    font-size="15"
+                                    font-weight="400"
+                                >
+                                    Number of detainees
+                                </text>
+                            </g>
+                        </svg>
+                    </div>
+                    
+                    <div id="chartTooltip" style="
+                        position: absolute;
+                        background: white;
+                        border: 1px solid #e2e8f0;
+                        border-radius: 8px;
+                        padding: 8px 12px;
+                        display: none;
+                        pointer-events: none;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        z-index: 1000;
+                    "></div>
+                </div>
+            `;
 
-            const width = 1100;
-            const height = 550;
-            const margin = { top: 80, right: 40, bottom: 70, left: 80 };
-            const chartWidth = width - margin.left - margin.right;
-            const chartHeight = height - margin.top - margin.bottom;
+            // Add tooltip interaction
+            const points = container.querySelectorAll('.data-point');
+            const tooltip = container.querySelector('#chartTooltip');
+            
+            points.forEach(point => {
+                point.addEventListener('mouseenter', (e) => {
+                    const month = e.target.getAttribute('data-month');
+                    const count = e.target.getAttribute('data-count');
+                    const rect = e.target.getBoundingClientRect();
+                    
+                    tooltip.innerHTML = `
+                        <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">${month}</div>
+                        <div style="color: #3b82f6;">Count: ${count}</div>
+                    `;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+                    tooltip.style.top = (rect.top + window.scrollY - 60) + 'px';
+                });
+                
+                point.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
+        }
+        
+        // Initialize detainee chart
+        DetaineeChart();
 
-            // Scales
-            const xScale = (date) => ((date - 1) / 30) * chartWidth;
-            const yMin = 460;
-            const yMax = 550;
-            const yScale = (value) => chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
+        // October Beginning vs End of Day Chart
+        function OctoberChart() {
+            const container = document.getElementById('octoberChart');
+            
+            const data = [
+                {date: 1, day: "Wed", beginning: 485, end: 475},
+                {date: 2, day: "Thu", beginning: 490, end: 477},
+                {date: 3, day: "Fri", beginning: 500, end: 489},
+                {date: 4, day: "Sat", beginning: 480, end: 473},
+                {date: 5, day: "Sun", beginning: 478, end: 476},
+                {date: 6, day: "Mon", beginning: 483, end: 467},
+                {date: 7, day: "Tue", beginning: 497, end: 481},
+                {date: 8, day: "Wed", beginning: 501, end: 482},
+                {date: 9, day: "Thu", beginning: 519, end: 499},
+                {date: 10, day: "Fri", beginning: 523, end: 516},
+                {date: 11, day: "Sat", beginning: 518, end: 511},
+                {date: 12, day: "Sun", beginning: 517, end: 515},
+                {date: 13, day: "Mon", beginning: 502, end: 497},
+                {date: 14, day: "Tue", beginning: 515, end: 502},
+                {date: 15, day: "Wed", beginning: 518, end: 497},
+                {date: 16, day: "Thu", beginning: 519, end: 503},
+                {date: 17, day: "Fri", beginning: 533, end: 515},
+                {date: 18, day: "Sat", beginning: 520, end: 516},
+                {date: 19, day: "Sun", beginning: 525, end: 520},
+                {date: 20, day: "Mon", beginning: 520, end: 515},
+                {date: 21, day: "Tue", beginning: 533, end: 512},
+                {date: 22, day: "Wed", beginning: 508, end: 496},
+                {date: 23, day: "Thu", beginning: 508, end: 506},
+                {date: 24, day: "Fri", beginning: 531, end: 507},
+                {date: 25, day: "Sat", beginning: 507, end: 498},
+                {date: 26, day: "Sun", beginning: 516, end: 507},
+                {date: 27, day: "Mon", beginning: 536, end: 516},
+                {date: 28, day: "Tue", beginning: 526, end: 515},
+                {date: 29, day: "Wed", beginning: 532, end: 524},
+                {date: 30, day: "Thu", beginning: 525, end: 525},
+                {date: 31, day: "Fri", beginning: 539, end: 524}
+            ];
 
-            // Create paths
-            let beginningPath = `M ${xScale(1)} ${yScale(data[0].beginning)}`;
-            let endPath = `M ${xScale(1)} ${yScale(data[0].end)}`;
-            
-            for (let i = 1; i < data.length; i++) {
-                beginningPath += ` L ${xScale(data[i].date)} ${yScale(data[i].beginning)}`;
-                endPath += ` L ${xScale(data[i].date)} ${yScale(data[i].end)}`;
-            }
+            const width = 1100;
+            const height = 550;
+            const margin = { top: 80, right: 40, bottom: 70, left: 80 };
+            const chartWidth = width - margin.left - margin.right;
+            const chartHeight = height - margin.top - margin.bottom;
 
-            const yTicks = [460, 480, 500, 520, 540];
-            const patternDays = data.filter(d => d.beginning > 526 && d.end < 526);
+            // Scales
+            const xScale = (date) => ((date - 1) / 30) * chartWidth;
+            const yMin = 460;
+            const yMax = 550;
+            const yScale = (value) => chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
 
-            container.innerHTML = `
-                <div style="background: white; padding: 40px; border: 1px solid #e0e0e0; max-width: 1200px; margin: 0 auto;">
-                    <h3 style="font-family: 'Work Sans', sans-serif; font-size: 1.8em; font-weight: 600; color: #1a1a1a; margin-bottom: 10px;">
-                        PCCF Beginning of Day v. End of Day - October 2025
-                    </h3>
-                    <p style="font-family: 'Work Sans', sans-serif; font-size: 1em; color: #666; margin-bottom: 20px;">
-                        Tracking the days with a count that starts above 526 and ends below 526
-                    </p>
-                    
-                    <!-- Legend -->
-                    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; font-family: 'Work Sans', sans-serif;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 30px; height: 3px; background: #3b82f6;"></div>
-                            <span style="font-weight: 600; font-size: 0.95em;">Beginning of Day</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <div style="width: 30px; height: 3px; background: #f97316;"></div>
-                            <span style="font-weight: 600; font-size: 0.95em;">End of Day</span>
-                        </div>
-                    </div>
-                    
-                    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="font-family: 'Work Sans', sans-serif; display: block; max-width: 100%; height: auto;">
-                        <g transform="translate(${margin.left}, ${margin.top})">
-                            <!-- Grid lines -->
-                            ${yTicks.map(tick => `
-                                <line 
-                                    x1="0" 
-                                    y1="${yScale(tick)}" 
-                                    x2="${chartWidth}" 
-                                    y2="${yScale(tick)}" 
-                                    stroke="#e8e8e8" 
-                                    stroke-width="1"
-                                />
-                            `).join('')}
-                            
-                            <!-- Red reference line at 526 -->
-                            <line 
-                                x1="0" 
-                                y1="${yScale(526)}" 
-                                x2="${chartWidth}" 
-                                y2="${yScale(526)}" 
-                                stroke="#ef4444" 
-                                stroke-width="2.5" 
-                                stroke-dasharray="8,4"
-                            />
-                            <text 
-                                x="-10" 
-                                y="${yScale(526)}" 
-                                text-anchor="end" 
-                                dominant-baseline="middle" 
-                                fill="#ef4444" 
-                                font-size="15"
-                                font-weight="700"
-                            >
-                                526
-                            </text>
-                            
-                            <!-- Purple vertical lines for days starting above 526 -->
-                            ${data.filter(d => d.beginning > 526).map(d => `
-                                <line 
-                                    x1="${xScale(d.date)}" 
-                                    y1="0" 
-                                    x2="${xScale(d.date)}" 
-                                    y2="${chartHeight}" 
-                                    stroke="#8b5cf6" 
-                                    stroke-width="2"
-                                    stroke-opacity="0.4"
-                                />
-                            `).join('')}
-                            
-                            <!-- End of Day line -->
-                            <path 
-                                d="${endPath}" 
-                                fill="none" 
-                                stroke="#f97316" 
-                                stroke-width="3"
-                            />
-                            
-                            <!-- Beginning of Day line -->
-                            <path 
-                                d="${beginningPath}" 
-                                fill="none" 
-                                stroke="#3b82f6" 
-                                stroke-width="3"
-                            />
-                            
-                            <!-- Beginning of Day points -->
-                            ${data.map(d => `
-                                <circle 
-                                    cx="${xScale(d.date)}" 
-                                    cy="${yScale(d.beginning)}" 
-                                    r="5" 
-                                    fill="#3b82f6" 
-                                    stroke="white" 
-                                    stroke-width="2"
-                                    class="october-point"
-                                    data-date="${d.date}"
-                                    data-day="${d.day}"
-                                    data-beginning="${d.beginning}"
-                                    data-end="${d.end}"
-                                    data-type="beginning"
-                                    style="cursor: pointer;"
-                                />
-                            `).join('')}
-                            
-                            <!-- End of Day points -->
-                            ${data.map(d => `
-                                <circle 
-                                    cx="${xScale(d.date)}" 
-                                    cy="${yScale(d.end)}" 
-                                    r="5" 
-                                    fill="#f97316" 
-                                    stroke="white" 
-                                    stroke-width="2"
-                                    class="october-point"
-                                    data-date="${d.date}"
-                                    data-day="${d.day}"
-                                    data-beginning="${d.beginning}"
-                                    data-end="${d.end}"
-                                    data-type="end"
-                                    style="cursor: pointer;"
-                                />
-                            `).join('')}
-                            
-                            <!-- X-axis -->
-                            <line 
-                                x1="0" 
-                                y1="${chartHeight}" 
-                                x2="${chartWidth}" 
-                                y2="${chartHeight}" 
-                                stroke="#94a3b8" 
-                                stroke-width="1.5"
-                            />
-                            
-                            <!-- X-axis labels -->
-                            ${[1, 5, 10, 15, 20, 25, 31].map(date => `
-                                <text 
-                                    x="${xScale(date)}" 
-                                    y="${chartHeight + 20}" 
-                                    text-anchor="middle" 
-                                    fill="#64748b" 
-                                    font-size="13"
-                                >
-                                    ${date}
-                                </text>
-                            `).join('')}
-                            
-                            <!-- X-axis label -->
-                            <text 
-                                x="${chartWidth / 2}" 
-                                y="${chartHeight + 50}" 
-                                text-anchor="middle" 
-                                fill="#334155" 
-                                font-size="15"
-                                font-weight="600"
-                            >
-                                October 2025
-                            </text>
-                            
-                            <!-- Y-axis -->
-                            <line 
-                                x1="0" 
-                                y1="0" 
-                                x2="0" 
-                                y2="${chartHeight}" 
-                                stroke="#94a3b8" 
-                                stroke-width="1.5"
-                            />
-                            
-                            <!-- Y-axis labels -->
-                            ${yTicks.map(tick => `
-                                <text 
-                                    x="-15" 
-                                    y="${yScale(tick)}" 
-                                    text-anchor="end" 
-                                    dominant-baseline="middle" 
-                                    fill="#64748b" 
-                                    font-size="15"
-                                >
-                                    ${tick}
-                                </text>
-                            `).join('')}
-                            
-                            <!-- Y-axis label -->
-                            <text 
-                                transform="rotate(-90)" 
-                                x="${-chartHeight / 2}" 
-                                y="-55" 
-                                text-anchor="middle" 
-                                fill="#334155" 
-                                font-size="15"
-                                font-weight="600"
-                            >
-                                Number of Detainees
-                            </text>
-                        </g>
-                    </svg>
-                    
-                    <div id="octoberTooltip" style="
-                        position: absolute;
-                        background: white;
-                        border: 1px solid #d1d5db;
-                        border-radius: 8px;
-                        padding: 12px;
-                        display: none;
-                        pointer-events: none;
-                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                        z-index: 1000;
-                        font-family: 'Work Sans', sans-serif;
-                    "></div>
-                </div>
-            `;
+            // Create paths
+            let beginningPath = `M ${xScale(1)} ${yScale(data[0].beginning)}`;
+            let endPath = `M ${xScale(1)} ${yScale(data[0].end)}`;
+            
+            for (let i = 1; i < data.length; i++) {
+                beginningPath += ` L ${xScale(data[i].date)} ${yScale(data[i].beginning)}`;
+                endPath += ` L ${xScale(data[i].date)} ${yScale(data[i].end)}`;
+            }
 
-            // Add tooltip interaction
-            const points = container.querySelectorAll('.october-point');
-            const tooltip = container.querySelector('#octoberTooltip');
-            
-            points.forEach(point => {
-                point.addEventListener('mouseenter', (e) => {
-                    const date = e.target.getAttribute('data-date');
-                    const day = e.target.getAttribute('data-day');
-                    const beginning = e.target.getAttribute('data-beginning');
-                    const end = e.target.getAttribute('data-end');
-                    const drop = beginning - end;
-                    const hasPattern = beginning > 526 && end < 526;
-                    
-                    const rect = e.target.getBoundingClientRect();
-                    
-                    tooltip.innerHTML = `
-                        <div style="font-weight: 600; margin-bottom: 6px;">Oct ${date} (${day})</div>
-                        <div style="color: #3b82f6; margin-bottom: 2px;">Beginning: ${beginning}</div>
-                        <div style="color: #f97316; margin-bottom: 4px;">End: ${end}</div>
-                        <div style="color: #64748b; font-size: 0.9em; margin-bottom: 4px;">Drop: ${drop}</div>
-                        ${hasPattern ? '<div style="color: #15803d; font-weight: 600; font-size: 0.9em; border-top: 1px solid #d1d5db; padding-top: 6px; margin-top: 6px;">✓ Starts above 526, ends below</div>' : ''}
-                    `;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = (rect.left + window.scrollX) + 'px';
-                    tooltip.style.top = (rect.top + window.scrollY - 110) + 'px';
-                });
-                
-                point.addEventListener('mouseleave', () => {
-                    tooltip.style.display = 'none';
-                });
-            });
-        }
-        
-        // Initialize October chart
-        OctoberChart();
+            const yTicks = [460, 480, 500, 520, 540];
+            const patternDays = data.filter(d => d.beginning > 526 && d.end < 526);
 
-        // Fiscal Year Average Daily Population Chart
-        function FiscalYearChart() {
-            const container = document.getElementById('fiscalYearChart');
-            
-            const data = [
-                { year: 'FY2019', value: 296 },
-                { year: 'FY2020', value: 221 },
-                { year: 'FY2021', value: 88 },
-                { year: 'FY2022', value: 109 },
-                { year: 'FY2023', value: 91 },
-                { year: 'FY2024', value: 246 },
-                { year: 'FY2025', value: 449 },
-                { year: 'FY2026', value: 509 }
-            ];
+            container.innerHTML = `
+                <div style="background: white; padding: 40px; border: 1px solid #e0e0e0; max-width: 1200px; margin: 0 auto;">
+                    <h6 style="font-family: 'Crimson Text', Georgia, serif; font-size: 1.4em; font-weight: 600; color: #1a1a1a; margin-bottom: 10px;">
+                        PCCF Beginning of Day v. End of Day - October 2025
+                    </h6>
+                    <p style="font-family: 'Crimson Text', Georgia, serif; font-size: 1em; color: #666; margin-bottom: 20px;">
+                        Tracking the days with a count that starts above 526 and ends below 526
+                    </p>
+                    
+                    <!-- Legend -->
+                    <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; font-family: 'Crimson Text', Georgia, serif;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 30px; height: 3px; background: #3b82f6;"></div>
+                            <span style="font-weight: 600; font-size: 0.95em;">Beginning of Day</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <div style="width: 30px; height: 3px; background: #f97316;"></div>
+                            <span style="font-weight: 600; font-size: 0.95em;">End of Day</span>
+                        </div>
+                    </div>
+                    
+                    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="font-family: 'Crimson Text', Georgia, serif; display: block; max-width: 100%; height: auto;">
+                        <g transform="translate(${margin.left}, ${margin.top})">
+                            <!-- Grid lines -->
+                            ${yTicks.map(tick => `
+                                <line 
+                                    x1="0" 
+                                    y1="${yScale(tick)}" 
+                                    x2="${chartWidth}" 
+                                    y2="${yScale(tick)}" 
+                                    stroke="#e8e8e8" 
+                                    stroke-width="1"
+                                />
+                            `).join('')}
+                            
+                            <!-- Red reference line at 526 -->
+                            <line 
+                                x1="0" 
+                                y1="${yScale(526)}" 
+                                x2="${chartWidth}" 
+                                y2="${yScale(526)}" 
+                                stroke="#ef4444" 
+                                stroke-width="2.5" 
+                                stroke-dasharray="8,4"
+                            />
+                            <text 
+                                x="-10" 
+                                y="${yScale(526)}" 
+                                text-anchor="end" 
+                                dominant-baseline="middle" 
+                                fill="#ef4444" 
+                                font-size="15"
+                                font-weight="700"
+                            >
+                                526
+                            </text>
+                            
+                            <!-- Purple vertical lines for days starting above 526 -->
+                            ${data.filter(d => d.beginning > 526).map(d => `
+                                <line 
+                                    x1="${xScale(d.date)}" 
+                                    y1="0" 
+                                    x2="${xScale(d.date)}" 
+                                    y2="${chartHeight}" 
+                                    stroke="#8b5cf6" 
+                                    stroke-width="2"
+                                    stroke-opacity="0.4"
+                                />
+                            `).join('')}
+                            
+                            <!-- End of Day line -->
+                            <path 
+                                d="${endPath}" 
+                                fill="none" 
+                                stroke="#f97316" 
+                                stroke-width="3"
+                            />
+                            
+                            <!-- Beginning of Day line -->
+                            <path 
+                                d="${beginningPath}" 
+                                fill="none" 
+                                stroke="#3b82f6" 
+                                stroke-width="3"
+                            />
+                            
+                            <!-- Beginning of Day points -->
+                            ${data.map(d => `
+                                <circle 
+                                    cx="${xScale(d.date)}" 
+                                    cy="${yScale(d.beginning)}" 
+                                    r="5" 
+                                    fill="#3b82f6" 
+                                    stroke="white" 
+                                    stroke-width="2"
+                                    class="october-point"
+                                    data-date="${d.date}"
+                                    data-day="${d.day}"
+                                    data-beginning="${d.beginning}"
+                                    data-end="${d.end}"
+                                    data-type="beginning"
+                                    style="cursor: pointer;"
+                                />
+                            `).join('')}
+                            
+                            <!-- End of Day points -->
+                            ${data.map(d => `
+                                <circle 
+                                    cx="${xScale(d.date)}" 
+                                    cy="${yScale(d.end)}" 
+                                    r="5" 
+                                    fill="#f97316" 
+                                    stroke="white" 
+                                    stroke-width="2"
+                                    class="october-point"
+                                    data-date="${d.date}"
+                                    data-day="${d.day}"
+                                    data-beginning="${d.beginning}"
+                                    data-end="${d.end}"
+                                    data-type="end"
+                                    style="cursor: pointer;"
+                                />
+                            `).join('')}
+                            
+                            <!-- X-axis -->
+                            <line 
+                                x1="0" 
+                                y1="${chartHeight}" 
+                                x2="${chartWidth}" 
+                                y2="${chartHeight}" 
+                                stroke="#94a3b8" 
+                                stroke-width="1.5"
+                            />
+                            
+                            <!-- X-axis labels -->
+                            ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].map(date => `
+                                <text 
+                                    x="${xScale(date)}" 
+                                    y="${chartHeight + 20}" 
+                                    text-anchor="middle" 
+                                    fill="#64748b" 
+                                    font-size="13"
+                                >
+                                    ${date}
+                                </text>
+                            `).join('')}
+                            
+                            <!-- X-axis label -->
+                            <text 
+                                x="${chartWidth / 2}" 
+                                y="${chartHeight + 50}" 
+                                text-anchor="middle" 
+                                fill="#334155" 
+                                font-size="15"
+                                font-weight="600"
+                            >
+                                October 2025
+                            </text>
+                            
+                            <!-- Y-axis -->
+                            <line 
+                                x1="0" 
+                                y1="0" 
+                                x2="0" 
+                                y2="${chartHeight}" 
+                                stroke="#94a3b8" 
+                                stroke-width="1.5"
+                            />
+                            
+                            <!-- Y-axis labels -->
+                            ${yTicks.map(tick => `
+                                <text 
+                                    x="-15" 
+                                    y="${yScale(tick)}" 
+                                    text-anchor="end" 
+                                    dominant-baseline="middle" 
+                                    fill="#64748b" 
+                                    font-size="15"
+                                >
+                                    ${tick}
+                                </text>
+                            `).join('')}
+                            
+                            <!-- Y-axis label -->
+                            <text 
+                                transform="rotate(-90)" 
+                                x="${-chartHeight / 2}" 
+                                y="-55" 
+                                text-anchor="middle" 
+                                fill="#334155" 
+                                font-size="15"
+                                font-weight="600"
+                            >
+                                Number of Detainees
+                            </text>
+                        </g>
+                    </svg>
+                    
+                    <div id="octoberTooltip" style="
+                        position: absolute;
+                        background: white;
+                        border: 1px solid #d1d5db;
+                        border-radius: 8px;
+                        padding: 12px;
+                        display: none;
+                        pointer-events: none;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                        z-index: 1000;
+                        font-family: 'Crimson Text', Georgia, serif;
+                    "></div>
+                </div>
+            `;
 
-            const width = 1000;
-            const height = 500;
-            const margin = { top: 20, right: 40, bottom: 60, left: 80 };
-            const chartWidth = width - margin.left - margin.right;
-            const chartHeight = height - margin.top - margin.bottom;
+            // Add tooltip interaction
+            const points = container.querySelectorAll('.october-point');
+            const tooltip = container.querySelector('#octoberTooltip');
+            
+            points.forEach(point => {
+                point.addEventListener('mouseenter', (e) => {
+                    const date = e.target.getAttribute('data-date');
+                    const day = e.target.getAttribute('data-day');
+                    const beginning = e.target.getAttribute('data-beginning');
+                    const end = e.target.getAttribute('data-end');
+                    const drop = beginning - end;
+                    const hasPattern = beginning > 526 && end < 526;
+                    
+                    const rect = e.target.getBoundingClientRect();
+                    
+                    tooltip.innerHTML = `
+                        <div style="font-weight: 600; margin-bottom: 6px;">Oct ${date} (${day})</div>
+                        <div style="color: #3b82f6; margin-bottom: 2px;">Beginning: ${beginning}</div>
+                        <div style="color: #f97316; margin-bottom: 4px;">End: ${end}</div>
+                        <div style="color: #64748b; font-size: 0.9em; margin-bottom: 4px;">Drop: ${drop}</div>
+                    `;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+                    tooltip.style.top = (rect.top + window.scrollY - 110) + 'px';
+                });
+                
+                point.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
+        }
+        
+        // Initialize October chart
+        OctoberChart();
 
-            // Scales
-            const xScale = (index) => (index / (data.length - 1)) * chartWidth;
-            const yMin = 0;
-            const yMax = 550;
-            const yScale = (value) => chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
+        // Fiscal Year Average Daily Population Chart
+        function FiscalYearChart() {
+            const container = document.getElementById('fiscalYearChart');
+            
+            const data = [
+                { year: 'FY2019', value: 296 },
+                { year: 'FY2020', value: 221 },
+                { year: 'FY2021', value: 88 },
+                { year: 'FY2022', value: 109 },
+                { year: 'FY2023', value: 91 },
+                { year: 'FY2024', value: 246 },
+                { year: 'FY2025', value: 449 },
+                { year: 'FY2026', value: 509 }
+            ];
 
-            // Create area path
-            let areaPath = `M ${xScale(0)} ${yScale(data[0].value)}`;
-            for (let i = 1; i < data.length; i++) {
-                areaPath += ` L ${xScale(i)} ${yScale(data[i].value)}`;
-            }
-            areaPath += ` L ${xScale(data.length - 1)} ${chartHeight}`;
-            areaPath += ` L ${xScale(0)} ${chartHeight} Z`;
+            const width = 1000;
+            const height = 500;
+            const margin = { top: 20, right: 40, bottom: 60, left: 80 };
+            const chartWidth = width - margin.left - margin.right;
+            const chartHeight = height - margin.top - margin.bottom;
 
-            // Create line path
-            let linePath = `M ${xScale(0)} ${yScale(data[0].value)}`;
-            for (let i = 1; i < data.length; i++) {
-                linePath += ` L ${xScale(i)} ${yScale(data[i].value)}`;
-            }
+            // Scales
+            const xScale = (index) => (index / (data.length - 1)) * chartWidth;
+            const yMin = 0;
+            const yMax = 550;
+            const yScale = (value) => chartHeight - ((value - yMin) / (yMax - yMin)) * chartHeight;
 
-            const yTicks = [100, 200, 300, 400, 500];
+            // Create area path
+            let areaPath = `M ${xScale(0)} ${yScale(data[0].value)}`;
+            for (let i = 1; i < data.length; i++) {
+                areaPath += ` L ${xScale(i)} ${yScale(data[i].value)}`;
+            }
+            areaPath += ` L ${xScale(data.length - 1)} ${chartHeight}`;
+            areaPath += ` L ${xScale(0)} ${chartHeight} Z`;
 
-            container.innerHTML = `
-                <div style="background: white; padding: 40px; border: 1px solid #e0e0e0; max-width: 1100px; margin: 0 auto;">
-                    <h3 style="font-family: 'Work Sans', sans-serif; font-size: 1.8em; font-weight: 600; color: #1a1a1a; margin-bottom: 5px;">
-                        Average daily population (ADP)
-                    </h3>
-                    <p style="font-family: 'Work Sans', sans-serif; font-size: 1em; color: #666; font-weight: 600; margin-bottom: 30px;">
-                        FY 2019 - FY 2026 YTD
-                    </p>
-                    
-                    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="font-family: 'Work Sans', sans-serif; display: block; max-width: 100%; height: auto;">
-                        <defs>
-                            <linearGradient id="fyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="5%" style="stop-color:#3b82f6;stop-opacity:0.8" />
-                                <stop offset="95%" style="stop-color:#3b82f6;stop-opacity:0.1" />
-                            </linearGradient>
-                        </defs>
-                        
-                        <g transform="translate(${margin.left}, ${margin.top})">
-                            <!-- Grid lines -->
-                            ${yTicks.map(tick => `
-                                <line 
-                                    x1="0" 
-                                    y1="${yScale(tick)}" 
-                                    x2="${chartWidth}" 
-                                    y2="${yScale(tick)}" 
-                                    stroke="#e8e8e8" 
-                                    stroke-width="1"
-                                />
-                            `).join('')}
-                            
-                            <!-- Area -->
-                            <path 
-                                d="${areaPath}" 
-                                fill="url(#fyGradient)"
-                            />
-                            
-                            <!-- Line -->
-                            <path 
-                                d="${linePath}" 
-                                fill="none" 
-                                stroke="#3b82f6" 
-                                stroke-width="3"
-                            />
-                            
-                            <!-- Data points -->
-                            ${data.map((d, i) => `
-                                <circle 
-                                    cx="${xScale(i)}" 
-                                    cy="${yScale(d.value)}" 
-                                    r="5" 
-                                    fill="#3b82f6" 
-                                    stroke="white" 
-                                    stroke-width="2"
-                                    class="fy-point"
-                                    data-year="${d.year}"
-                                    data-value="${d.value}"
-                                    style="cursor: pointer;"
-                                />
-                            `).join('')}
-                            
-                            <!-- X-axis -->
-                            <line 
-                                x1="0" 
-                                y1="${chartHeight}" 
-                                x2="${chartWidth}" 
-                                y2="${chartHeight}" 
-                                stroke="#94a3b8" 
-                                stroke-width="1.5"
-                            />
-                            
-                            <!-- X-axis labels -->
-                            ${data.map((d, i) => `
-                                <text 
-                                    x="${xScale(i)}" 
-                                    y="${chartHeight + 25}" 
-                                    text-anchor="middle" 
-                                    fill="#6b7280" 
-                                    font-size="14"
-                                >
-                                    ${d.year}
-                                </text>
-                            `).join('')}
-                            
-                            <!-- Y-axis -->
-                            <line 
-                                x1="0" 
-                                y1="0" 
-                                x2="0" 
-                                y2="${chartHeight}" 
-                                stroke="#94a3b8" 
-                                stroke-width="1.5"
-                            />
-                            
-                            <!-- Y-axis labels -->
-                            ${yTicks.map(tick => `
-                                <text 
-                                    x="-15" 
-                                    y="${yScale(tick)}" 
-                                    text-anchor="end" 
-                                    dominant-baseline="middle" 
-                                    fill="#6b7280" 
-                                    font-size="15"
-                                >
-                                    ${tick}
-                                </text>
-                            `).join('')}
-                            
-                            <!-- Y-axis label -->
-                            <text 
-                                transform="rotate(-90)" 
-                                x="${-chartHeight / 2}" 
-                                y="-55" 
-                                text-anchor="middle" 
-                                fill="#6b7280" 
-                                font-size="15"
-                            >
-                                Number of detainees
-                            </text>
-                        </g>
-                    </svg>
-                    
-                    <div id="fyTooltip" style="
-                        position: absolute;
-                        background: white;
-                        border: 1px solid #e5e7eb;
-                        border-radius: 6px;
-                        padding: 8px 12px;
-                        display: none;
-                        pointer-events: none;
-                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-                        z-index: 1000;
-                    "></div>
-                </div>
-            `;
+            // Create line path
+            let linePath = `M ${xScale(0)} ${yScale(data[0].value)}`;
+            for (let i = 1; i < data.length; i++) {
+                linePath += ` L ${xScale(i)} ${yScale(data[i].value)}`;
+            }
 
-            // Add tooltip interaction
-            const points = container.querySelectorAll('.fy-point');
-            const tooltip = container.querySelector('#fyTooltip');
-            
-            points.forEach(point => {
-                point.addEventListener('mouseenter', (e) => {
-                    const year = e.target.getAttribute('data-year');
-                    const value = e.target.getAttribute('data-value');
-                    const rect = e.target.getBoundingClientRect();
-                    
-                    tooltip.innerHTML = `
-                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 2px;">${year}</div>
-                        <div style="color: #3b82f6;">ADP: ${value}</div>
-                    `;
-                    tooltip.style.display = 'block';
-                    tooltip.style.left = (rect.left + window.scrollX) + 'px';
-                    tooltip.style.top = (rect.top + window.scrollY - 60) + 'px';
-                });
-                
-                point.addEventListener('mouseleave', () => {
-                    tooltip.style.display = 'none';
-                });
-            });
-        }
-        
-        // Initialize fiscal year chart
-        FiscalYearChart();
-    </script>
+            const yTicks = [100, 200, 300, 400, 500];
+
+            container.innerHTML = `
+                <div style="background: white; padding: 40px; border: 1px solid #e0e0e0; max-width: 1100px; margin: 0 auto;">
+                    <h3 style="font-family: 'Crimson Text', Georgia, serif; font-size: 1.8em; font-weight: 600; color: #1a1a1a; margin-bottom: 5px;">
+                        Average Daily Population (ADP)
+                    </h3>
+                    <p style="font-family: 'Crimson Text', Georgia, serif; font-size: 1em; color: #666; font-weight: 600; margin-bottom: 30px;">
+                        FY 2019 - FY 2026 YTD
+                    </p>
+                    
+                    <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="font-family: 'Crimson Text', Georgia, serif; display: block; max-width: 100%; height: auto;">
+                        <defs>
+                            <linearGradient id="fyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="5%" style="stop-color:#3b82f6;stop-opacity:0.8" />
+                                <stop offset="95%" style="stop-color:#3b82f6;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <g transform="translate(${margin.left}, ${margin.top})">
+                            <!-- Grid lines -->
+                            ${yTicks.map(tick => `
+                                <line 
+                                    x1="0" 
+                                    y1="${yScale(tick)}" 
+                                    x2="${chartWidth}" 
+                                    y2="${yScale(tick)}" 
+                                    stroke="#e8e8e8" 
+                                    stroke-width="1"
+                                />
+                            `).join('')}
+                            
+                            <!-- Area -->
+                            <path 
+                                d="${areaPath}" 
+                                fill="url(#fyGradient)"
+                            />
+                            
+                            <!-- Line -->
+                            <path 
+                                d="${linePath}" 
+                                fill="none" 
+                                stroke="#3b82f6" 
+                                stroke-width="3"
+                            />
+                            
+                            <!-- Data points -->
+                            ${data.map((d, i) => `
+                                <circle 
+                                    cx="${xScale(i)}" 
+                                    cy="${yScale(d.value)}" 
+                                    r="5" 
+                                    fill="#3b82f6" 
+                                    stroke="white" 
+                                    stroke-width="2"
+                                    class="fy-point"
+                                    data-year="${d.year}"
+                                    data-value="${d.value}"
+                                    style="cursor: pointer;"
+                                />
+                            `).join('')}
+                            
+                            <!-- X-axis -->
+                            <line 
+                                x1="0" 
+                                y1="${chartHeight}" 
+                                x2="${chartWidth}" 
+                                y2="${chartHeight}" 
+                                stroke="#94a3b8" 
+                                stroke-width="1.5"
+                            />
+                            
+                            <!-- X-axis labels -->
+                            ${data.map((d, i) => `
+                                <text 
+                                    x="${xScale(i)}" 
+                                    y="${chartHeight + 25}" 
+                                    text-anchor="middle" 
+                                    fill="#6b7280" 
+                                    font-size="14"
+                                >
+                                    ${d.year}
+                                </text>
+                            `).join('')}
+                            
+                            <!-- Y-axis -->
+                            <line 
+                                x1="0" 
+                                y1="0" 
+                                x2="0" 
+                                y2="${chartHeight}" 
+                                stroke="#94a3b8" 
+                                stroke-width="1.5"
+                            />
+                            
+                            <!-- Y-axis labels -->
+                            ${yTicks.map(tick => `
+                                <text 
+                                    x="-15" 
+                                    y="${yScale(tick)}" 
+                                    text-anchor="end" 
+                                    dominant-baseline="middle" 
+                                    fill="#6b7280" 
+                                    font-size="15"
+                                >
+                                    ${tick}
+                                </text>
+                            `).join('')}
+                            
+                            <!-- Y-axis label -->
+                            <text 
+                                transform="rotate(-90)" 
+                                x="${-chartHeight / 2}" 
+                                y="-55" 
+                                text-anchor="middle" 
+                                fill="#6b7280" 
+                                font-size="15"
+                            >
+                                Number of detainees
+                            </text>
+                        </g>
+                    </svg>
+                    
+                    <div id="fyTooltip" style="
+                        position: absolute;
+                        background: white;
+                        border: 1px solid #e5e7eb;
+                        border-radius: 6px;
+                        padding: 8px 12px;
+                        display: none;
+                        pointer-events: none;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                        z-index: 1000;
+                    "></div>
+                </div>
+            `;
+
+            // Add tooltip interaction
+            const points = container.querySelectorAll('.fy-point');
+            const tooltip = container.querySelector('#fyTooltip');
+            
+            points.forEach(point => {
+                point.addEventListener('mouseenter', (e) => {
+                    const year = e.target.getAttribute('data-year');
+                    const value = e.target.getAttribute('data-value');
+                    const rect = e.target.getBoundingClientRect();
+                    
+                    tooltip.innerHTML = `
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 2px;">${year}</div>
+                        <div style="color: #3b82f6;">ADP: ${value}</div>
+                    `;
+                    tooltip.style.display = 'block';
+                    tooltip.style.left = (rect.left + window.scrollX) + 'px';
+                    tooltip.style.top = (rect.top + window.scrollY - 60) + 'px';
+                });
+                
+                point.addEventListener('mouseleave', () => {
+                    tooltip.style.display = 'none';
+                });
+            });
+        }
+        
+        // Initialize fiscal year chart
+        FiscalYearChart();
+    </script>
+    <p><i>* Visualizations made using Claude Sonnet 4.5</i></p>
 </body>
 </html>
